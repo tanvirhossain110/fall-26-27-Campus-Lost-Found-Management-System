@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Student and Faculty dashboard of the Campus Lost and Found Management System">
+  <title>Student / Faculty Dashboard | Campus Lost &amp; Found</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">Campus<span>Lost&amp;Found</span></a>
+    <div class="user-info">
+      <span class="badge student">Student</span>
+      <span>Welcome, Rahim Uddin</span>
+      <a href="index.html" class="btn btn-small btn-light">Logout</a>
+    </div>
+  </header>
+
+  <nav class="topnav">
+    <button type="button" id="nav-lostSection" onclick="showSection('lostSection')">Lost Item Report</button>
+    <button type="button" id="nav-foundSection" onclick="showSection('foundSection')">Found Item Post</button>
+    <button type="button" id="nav-claimSection" onclick="showSection('claimSection')">Search &amp; Claim Request</button>
+  </nav>
+
+  <main class="container">
+
+    <!-- =========================================================
+         LOST ITEM REPORT: Create, Read, Update, Delete and Search
+         ========================================================= -->
+    <section id="lostSection" class="page-section">
+      <h2 class="page-title">Lost Item Report</h2>
+      <p class="page-subtitle">Report something you have lost on campus. The Lost &amp; Found Officer will match it with found items.</p>
+
+      <div id="lostMessage" class="message"></div>
+
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <h3 id="lostFormTitle">Report a Lost Item</h3>
+            <form id="lostForm" onsubmit="return saveLost()">
+              <fieldset>
+                <legend>Lost Item Details</legend>
+                <table class="form-table">
+                  <tr>
+                    <td><label for="lostItemName">Item name:</label></td>
+                    <td>
+                      <input type="text" id="lostItemName" placeholder="e.g. Black backpack">
+                      <span class="error" id="lostItemNameError"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><label for="lostCategory">Category:</label></td>
+                    <td>
+                      <select id="lostCategory">
+                        <option value="">-- Select Category --</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Bags">Bags</option>
+                        <option value="ID Cards">ID Cards</option>
+                        <option value="Books">Books</option>
+                        <option value="Keys">Keys</option>
+                        <option value="Clothing">Clothing</option>
+                        <option value="Other">Other</option>
+                      </select>
+                      <span class="error" id="lostCategoryError"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><label for="lostLocation">Where did you lose it?</label></td>
+                    <td>
+                      <input type="text" id="lostLocation" placeholder="e.g. Library 2nd floor">
+                      <span class="error" id="lostLocationError"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><label for="lostDate">Date lost:</label></td>
+                    <td>
+                      <input type="date" id="lostDate">
+                      <span class="error" id="lostDateError"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><label for="lostDescription">Description:</label></td>
+                    <td>
+                      <textarea id="lostDescription" rows="4" cols="30" placeholder="Colour, brand, marks, contents..."></textarea>
+                      <span class="error" id="lostDescriptionError"></span>
+                    </td>
+                  </tr>
+                </table>
+              </fieldset>
+              <input type="submit" id="lostSaveButton" class="btn" value="Submit Report">
+              <button type="button" class="btn btn-secondary" onclick="resetLostForm()">Cancel</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-wide">
+          <div class="card">
+            <h3>My lost reports</h3>
+            <div class="search-bar">
+              <input type="text" id="lostSearch" placeholder="Search by item, location or id..." onkeyup="renderLost()">
+              <select id="lostStatusFilter" onchange="renderLost()">
+                <option value="All">Any status</option>
+                <option value="Open">Open</option>
+                <option value="Matched">Matched</option>
+                <option value="Claimed">Claimed</option>
+              </select>
+            </div>
+            <p class="result-count" id="lostCount"></p>
+            <div class="table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr><th>ID</th><th>Item</th><th>Category</th><th>Location</th><th>Date</th><th>Status</th><th>Actions</th></tr>
+                </thead>
+                <tbody id="lostTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         FOUND ITEM POST: Create and browse found items
+         ========================================================= -->
+    <section id="foundSection" class="page-section">
+      <h2 class="page-title">Found Item Post</h2>
+      <p class="page-subtitle">Found something? Post it so the owner can claim it. Hand the item to the Lost &amp; Found Officer afterwards.</p>
+
+      <div id="foundMessage" class="message"></div>
+
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <h3>Post a Found Item</h3>
+            <form id="foundForm" onsubmit="return saveFound()">
+              <fieldset>
+                <legend>Found Item Details</legend>
+                <table class="form-table">
+                  <tr>
+                    <td><label for="foundItemName">Item name:</label></td>
+                    <td>
+                      <input type="text" id="foundItemName" placeholder="e.g. Blue water bottle">
+                      <span class="error" id="foundItemNameError"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><label for="foundCategory">Category:</label></td>
+                    <td>
+                      <select id="foundCategory">
+                        <option value="">-- Select Category --</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Bags">Bags</option>
+                        <option value="ID Cards">ID Cards</option>
+                        <option value="Books">Books</option>
+                        <option value="Keys">Keys</option>
+                        <option value="Clothing">Clothing</option>
+                        <option value="Other">Other</option>
+                      </select>
+                      <span class="error" id="foundCategoryError"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><label for="foundLocation">Where did you find it?</label></td>
+                    <td>
+                      <input type="text" id="foundLocation" placeholder="e.g. Cafeteria table 4">
+                      <span class="error" id="foundLocationError"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><label for="foundDate">Date found:</label></td>
+                    <td>
+                      <input type="date" id="foundDate">
+                      <span class="error" id="foundDateError"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Handed to officer?</td>
+                    <td>
+                      <input type="radio" id="handedYes" name="handedToOfficer" value="Yes">
+                      <label for="handedYes" class="option-label">Yes, already submitted</label>
+                      <input type="radio" id="handedNo" name="handedToOfficer" value="No" checked>
+                      <label for="handedNo" class="option-label">Not yet</label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><label for="foundDescription">Description:</label></td>
+                    <td>
+                      <textarea id="foundDescription" rows="4" cols="30" placeholder="Colour, brand, marks, contents..."></textarea>
+                      <span class="error" id="foundDescriptionError"></span>
+                    </td>
+                  </tr>
+                </table>
+              </fieldset>
+              <input type="submit" class="btn btn-success" value="Post Found Item">
+              <button type="button" class="btn btn-secondary" onclick="resetFoundForm()">Cancel</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-wide">
+          <div class="card">
+            <h3>Recently found items</h3>
+            <div class="search-bar">
+              <input type="text" id="foundSearch" placeholder="Search by item, location or id..." onkeyup="renderFound()">
+              <select id="foundCategoryFilter" onchange="renderFound()">
+                <option value="All">All categories</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Bags">Bags</option>
+                <option value="ID Cards">ID Cards</option>
+                <option value="Books">Books</option>
+                <option value="Keys">Keys</option>
+                <option value="Clothing">Clothing</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <p class="result-count" id="foundCount"></p>
+            <div class="table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr><th>ID</th><th>Item</th><th>Category</th><th>Found at</th><th>Date</th><th>Status</th><th>Action</th></tr>
+                </thead>
+                <tbody id="foundTableBody"></tbody>
+              </table>
+            </div>
+            <p class="hint">Found items are stored by the Lost &amp; Found Officer until an owner claims them.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         SEARCH & CLAIM REQUEST: find an item and submit a claim
+         ========================================================= -->
+    <section id="claimSection" class="page-section">
+      <h2 class="page-title">Search &amp; Claim Request</h2>
+      <p class="page-subtitle">Search the found item inventory and claim what belongs to you.</p>
+
+      <div id="claimMessage" class="message"></div>
+
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <h3>Submit a claim</h3>
+            <form id="claimForm" onsubmit="return saveClaim()">
+              <fieldset>
+                <legend>Claim Details</legend>
+                <table class="form-table">
+                  <tr>
+                    <td><label for="claimItem">Found item:</label></td>
+                    <td>
+                      <!-- Options are filled by JavaScript from the found items list -->
+                      <select id="claimItem"></select>
+                      <span class="error" id="claimItemError"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><label for="claimProof">Proof of ownership:</label></td>
+                    <td>
+                      <textarea id="claimProof" rows="4" cols="30" placeholder="Describe unique marks, contents, serial numbers..."></textarea>
+                      <span class="error" id="claimProofError"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><label for="claimContact">Contact number:</label></td>
+                    <td>
+                      <input type="tel" id="claimContact" placeholder="11 digits, e.g. 01712345678">
+                      <span class="error" id="claimContactError"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Willing to collect:</td>
+                    <td>
+                      <input type="radio" id="collectOffice" name="collectWhere" value="Lost & Found Office">
+                      <label for="collectOffice" class="option-label">Lost &amp; Found Office</label>
+                      <input type="radio" id="collectAppointment" name="collectWhere" value="Appointment">
+                      <label for="collectAppointment" class="option-label">Need an appointment</label>
+                      <span class="error" id="collectWhereError"></span>
+                    </td>
+                  </tr>
+                </table>
+              </fieldset>
+              <input type="submit" class="btn" value="Send Claim Request">
+              <button type="button" class="btn btn-secondary" onclick="resetClaimForm()">Cancel</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-wide">
+          <div class="card">
+            <h3>Found items you can claim</h3>
+            <div class="search-bar">
+              <input type="text" id="claimSearch" placeholder="Search by item, category or location..." onkeyup="renderClaimItems()">
+              <select id="claimCategoryFilter" onchange="renderClaimItems()">
+                <option value="All">All categories</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Bags">Bags</option>
+                <option value="ID Cards">ID Cards</option>
+                <option value="Books">Books</option>
+                <option value="Keys">Keys</option>
+                <option value="Clothing">Clothing</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <p class="result-count" id="claimCount"></p>
+            <div class="table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr><th>ID</th><th>Item</th><th>Category</th><th>Found at</th><th>Date</th><th>Claim</th></tr>
+                </thead>
+                <tbody id="claimTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>My claim requests</h3>
+            <p class="result-count" id="myClaimCount"></p>
+            <div class="table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr><th>ID</th><th>Item</th><th>Submitted</th><th>Status</th></tr>
+                </thead>
+                <tbody id="myClaimTableBody"></tbody>
+              </table>
+            </div>
+            <p class="hint">Claims are checked by the Claim Verification Officer before handover.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    &copy; 2026 Campus Lost &amp; Found Management System &middot; CSC 3215 Web Technologies
+  </footer>
+
+</body>
+</html>
+
+
