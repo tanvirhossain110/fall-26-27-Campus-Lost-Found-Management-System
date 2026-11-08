@@ -1,22 +1,22 @@
 # fall-26-27-Campus-Lost-Found-Management-System
 
-## User 1: Student / Reporter
+## 1. Student / Faculty
 - Lost Item Report
-- Smart Item Matching
-- Lost Item Tracking
+- Found Item Post
+- Search & Claim Request
 
-## User 2: Finder
-- Found Item Submission
-- Secure Handover Request
-- Found Item Status Update
+## 2. Lost & Found Officer
+- Physical Item Inventory
+- Collection Appointment Scheduling
+- Item Handover Records
 
-## User 3: Campus Security Officer
-- Ownership Verification
-- Secure Item Storage
-- Handover Approval
+## 3. Claim Verification Officer
+- Claim Evidence Review
+- Ownership Verification Decision
+- Disputed Claim Investigation
 
-## User 4: Admin
+## 4. Admin
 - User & Role Management
-- Report Moderation
-- Analytics & Reports
+- Item Category & Campus Location Management
+- System Analytics & Reports
 
