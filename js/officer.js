@@ -1,7 +1,4 @@
 
-// ===============================
-// 1. FOUND ITEMS ARRAY
-// ===============================
 
 let foundItems = [
     {
@@ -31,9 +28,7 @@ let foundItems = [
 ];
 
 
-// ===============================
-// 2. APPOINTMENT ARRAY
-// ===============================
+
 
 let appointments = [
     {
@@ -57,9 +52,8 @@ let appointments = [
 ];
 
 
-// ===============================
-// 3. HANDOVER HISTORY ARRAY
-// ===============================
+
+
 
 let handovers = [
     {
@@ -75,9 +69,8 @@ let handovers = [
 ];
 
 
-// ===============================
-// 4. STATUS USING SWITCH
-// ===============================
+
+
 
 function showStatus(status) {
 
@@ -107,9 +100,8 @@ function showStatus(status) {
 }
 
 
-// ===============================
-// 5. MANAGE FOUND ITEMS
-// ===============================
+
+
 
 let editItemIndex = -1;
 
@@ -257,9 +249,8 @@ function searchItems() {
 }
 
 
-// ===============================
-// 6. COLLECTION APPOINTMENTS
-// ===============================
+
+
 
 function renderAppointments(searchText = "") {
 
@@ -369,9 +360,8 @@ function searchAppointments() {
 }
 
 
-// ===============================
-// 7. ITEM HANDOVER
-// ===============================
+
+
 
 function saveHandover() {
 
@@ -466,9 +456,8 @@ function saveHandover() {
 }
 
 
-// ===============================
-// 8. HANDOVER HISTORY
-// ===============================
+
+
 
 function renderHistory(searchText = "") {
 
@@ -525,9 +514,8 @@ function searchHistory() {
 }
 
 
-// ===============================
-// 9. DASHBOARD STATISTICS
-// ===============================
+
+
 
 function generateDashboard() {
 
@@ -593,9 +581,9 @@ function generateDashboard() {
 }
 
 
-// ===============================
-// 10. OFFICER PROFILE
-// ===============================
+
+
+
 
 function updateProfile() {
 
@@ -618,9 +606,8 @@ function updateProfile() {
 }
 
 
-// ===============================
-// 11. CHANGE PASSWORD
-// ===============================
+
+
 
 let demoPassword = "officer123";
 
@@ -661,9 +648,8 @@ function changePassword() {
 }
 
 
-// ===============================
-// 12. PAGE EVENTS
-// ===============================
+
+
 
 document.addEventListener("DOMContentLoaded", function() {
 
