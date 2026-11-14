@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Collection Appointment Management">
+    <title>Collection Appointments</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>Campus Lost & Found Management System</h1>
+    <p>Lost & Found Officer Panel</p>
+</header>
+
+<nav>
+    <a href="officer-dashboard.html">Dashboard</a> |
+    <a href="manage-found-items.html">Manage Found Items</a> |
+    <a href="collection-appointments.html">Appointments</a> |
+    <a href="item-handover.html">Item Handover</a> |
+    <a href="handover-history.html">History</a> |
+    <a href="officer-profile.html">My Profile</a> |
+    <a href="#">Logout</a>
+</nav>
+
+<main>
+
+    <section>
+        <h2>Collection Appointments</h2>
+        <p>Manage appointments for collecting found items.</p>
+    </section>
+
+    <section>
+        <h3>Schedule New Appointment</h3>
+
+        <form id="appointmentForm" onsubmit="return saveAppointment()">
+
+            <fieldset>
+                <legend>Appointment Information</legend>
+
+                <table>
+                    <tr>
+                        <td><label for="studentName">Student Name:</label></td>
+                        <td><input type="text" id="studentName" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="studentId">Student ID:</label></td>
+                        <td><input type="text" id="studentId" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="appointmentItem">Item Name:</label></td>
+                        <td><input type="text" id="appointmentItem" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="appointmentDate">Appointment Date:</label></td>
+                        <td><input type="date" id="appointmentDate" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="appointmentTime">Appointment Time:</label></td>
+                        <td><input type="time" id="appointmentTime" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="appointmentStatus">Status:</label></td>
+                        <td>
+                            <select id="appointmentStatus">
+                                <option>Scheduled</option>
+                                <option>Completed</option>
+                                <option>Cancelled</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button type="submit">Schedule Appointment</button>
+                            <button type="reset">Clear</button>
+                        </td>
+                    </tr>
+                </table>
+
+                <p class="error" id="appointmentError"></p>
+            </fieldset>
+
+        </form>
+    </section>
+
+    <section>
+       <h3>Search Appointments</h3>
+
+        <input type="text" id="appointmentSearch"
+         placeholder="Search by student name or ID"
+         onkeyup="searchAppointments()">
+
+        <button type="button" onclick="searchAppointments()">Search</button>
+    </section>
+
+    <section>
+        <h3>All Collection Appointments</h3>
+
+        <table>
+            <tr>
+                <th>Appointment ID</th>
+                <th>Student Name</th>
+                <th>Student ID</th>
+                <th>Item Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+
+            <tbody id="appointmentTable"></tbody>
+        </table>
+    </section>
+
+</main>
+
+<footer>
+    <p>Campus Lost & Found Management System</p>
+</footer>
+
+<script src="js/officer.js"></script>
+
+</body>
+</html>
