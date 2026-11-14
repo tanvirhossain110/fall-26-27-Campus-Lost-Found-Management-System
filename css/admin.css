@@ -1,0 +1,171 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: Arial;
+    background-color: #f2f4f7;
+}
+
+header {
+    background-color: #243447;
+    color: white;
+    padding: 20px;
+}
+
+nav {
+    background-color: #34495e;
+    padding: 15px;
+    position: sticky;
+    top: 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+}
+
+nav a:hover {
+    background-color: #1abc9c;
+}
+
+main {
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+h2, h3 {
+    color: #243447;
+}
+
+.card {
+    background-color: white;
+    padding: 20px;
+    margin: 15px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px #ccc;
+}
+
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.dashboard-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 5px solid #1abc9c;
+    box-shadow: 0 2px 5px #ccc;
+}
+
+form {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+fieldset {
+    border: 1px solid #999;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+legend {
+    font-weight: bold;
+    color: #243447;
+}
+
+input, select, textarea {
+    padding: 9px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+}
+
+input:focus, select:focus, textarea:focus {
+    border: 2px solid #1abc9c;
+}
+
+button {
+    background-color: #2471a3;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #1abc9c;
+    transform: scale(1.03);
+}
+
+button:disabled {
+    background-color: gray;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #34495e;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f4f7;
+}
+
+.error {
+    color: red;
+}
+
+.notice-board {
+    max-height: 180px;
+    overflow-y: auto;
+    background-color: white;
+    padding: 15px;
+}
+
+.notice {
+    border-left: 4px solid #1abc9c;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.notice:hover {
+    transform: scale(1.01);
+}
+
+footer {
+    background-color: #243447;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+@media screen and (max-width: 700px) {
+    .dashboard-cards {
+        grid-template-columns: 1fr;
+    }
+
+    nav a {
+        display: block;
+    }
+}
