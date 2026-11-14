@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Category Management">
+    <meta name="author" content="Campus Lost & Found Management System">
+    <title>Category Management</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+</head>
+<body>
+
+<header>
+    <h1>Campus Lost & Found Management System</h1>
+    <h2>Admin Panel</h2>
+</header>
+
+<nav>
+    <a href="admin-dashboard.html">Dashboard</a>
+    <a href="user-management.html">User Management</a>
+    <a href="role-management.html">Role Management</a>
+    <a href="category-management.html">Category Management</a>
+    <a href="campus-locations.html">Campus Locations</a>
+    <a href="reports-analytics.html">Reports & Analytics</a>
+    <a href="admin-profile.html">Admin Profile</a>
+</nav>
+
+<main>
+    <h2>Category Management</h2>
+    <p>Create and manage item categories.</p>
+
+    <section class="card">
+        <h3>Add New Category</h3>
+
+        <form id="categoryForm" onsubmit="return addCategory()">
+            <fieldset>
+                <legend>Category Information</legend>
+
+                <table>
+                    <tr>
+                        <td><label for="categoryname">Category Name:</label></td>
+                        <td><input type="text" id="categoryname" required></td>
+                    </tr>
+                    <tr><td colspan="2"><br></td></tr>
+
+                    <tr>
+                        <td><label for="description">Description:</label></td>
+                        <td><textarea id="description"></textarea></td>
+                    </tr>
+                    <tr><td colspan="2"><br></td></tr>
+
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button type="submit" id="categorySubmit">Add Category</button>
+                            <button type="reset">Clear</button>
+                        </td>
+                    </tr>
+                </table>
+
+                <p id="error" class="error"></p>
+            </fieldset>
+        </form>
+    </section>
+
+    <section class="card">
+        <h3>Search Category</h3>
+
+        <input type="text" id="categorySearch" placeholder="Search category"
+               onkeyup="searchTable('categorySearch', 'categoryTable')">
+    </section>
+
+    <section class="card">
+        <h3>All Categories</h3>
+
+        <table id="categoryTable">
+            <tr>
+                <th>Category ID</th>
+                <th>Category Name</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+            <tbody id="categoryRows"></tbody>
+        </table>
+    </section>
+</main>
+
+<footer>
+    <p>Campus Lost & Found Management System</p>
+</footer>
+<script src="js/admin.js" defer></script>
+</body>
+</html>

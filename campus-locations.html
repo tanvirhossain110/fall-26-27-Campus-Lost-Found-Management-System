@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Campus Location Management">
+    <meta name="author" content="Campus Lost & Found Management System">
+    <title>Campus Location Management</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+</head>
+<body>
+
+<header>
+    <h1>Campus Lost & Found Management System</h1>
+    <h2>Admin Panel</h2>
+</header>
+
+<nav>
+    <a href="admin-dashboard.html">Dashboard</a>
+    <a href="user-management.html">User Management</a>
+    <a href="role-management.html">Role Management</a>
+    <a href="category-management.html">Category Management</a>
+    <a href="campus-locations.html">Campus Locations</a>
+    <a href="reports-analytics.html">Reports & Analytics</a>
+    <a href="admin-profile.html">Admin Profile</a>
+</nav>
+
+<main>
+    <h2>Campus Location Management</h2>
+    <p>Manage campus locations where items are lost or found.</p>
+
+    <section class="card">
+        <h3>Add New Location</h3>
+
+        <form id="locationForm" onsubmit="return addLocation()">
+            <fieldset>
+                <legend>Location Information</legend>
+
+                <table>
+                    <tr>
+                        <td><label for="locationname">Location Name:</label></td>
+                        <td><input type="text" id="locationname" required></td>
+                    </tr>
+                    <tr><td colspan="2"><br></td></tr>
+
+                    <tr>
+                        <td><label for="building">Building Name:</label></td>
+                        <td><input type="text" id="building"></td>
+                    </tr>
+                    <tr><td colspan="2"><br></td></tr>
+
+                    <tr>
+                        <td><label for="floor">Floor:</label></td>
+                        <td><input type="text" id="floor"></td>
+                    </tr>
+                    <tr><td colspan="2"><br></td></tr>
+
+                    <tr>
+                        <td><label for="locationDescription">Description:</label></td>
+                        <td><textarea id="locationDescription"></textarea></td>
+                    </tr>
+                    <tr><td colspan="2"><br></td></tr>
+
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button type="submit" id="locationSubmit">Add Location</button>
+                            <button type="reset">Clear</button>
+                        </td>
+                    </tr>
+                </table>
+
+                <p id="error" class="error"></p>
+            </fieldset>
+        </form>
+    </section>
+
+    <section class="card">
+        <h3>Search Location</h3>
+
+        <input type="text" id="locationSearch" placeholder="Search location"
+               onkeyup="searchTable('locationSearch', 'locationTable')">
+    </section>
+
+    <section class="card">
+        <h3>Campus Locations</h3>
+
+        <table id="locationTable">
+            <tr>
+                <th>Location ID</th>
+                <th>Location Name</th>
+                <th>Building</th>
+                <th>Floor</th>
+                <th>Action</th>
+            </tr>
+            <tbody id="locationRows"></tbody>
+        </table>
+    </section>
+</main>
+
+<footer>
+    <p>Campus Lost & Found Management System</p>
+</footer>
+<script src="js/admin.js" defer></script>
+</body>
+</html>

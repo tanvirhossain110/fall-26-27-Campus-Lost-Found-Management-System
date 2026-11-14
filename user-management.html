@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="User Management">
+    <meta name="author" content="Campus Lost & Found Management System">
+    <title>User Management</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+</head>
+<body>
+
+<header>
+    <h1>Campus Lost & Found Management System</h1>
+    <h2>Admin Panel</h2>
+</header>
+
+<nav>
+    <a href="admin-dashboard.html">Dashboard</a>
+    <a href="user-management.html">User Management</a>
+    <a href="role-management.html">Role Management</a>
+    <a href="category-management.html">Category Management</a>
+    <a href="campus-locations.html">Campus Locations</a>
+    <a href="reports-analytics.html">Reports & Analytics</a>
+    <a href="admin-profile.html">Admin Profile</a>
+</nav>
+
+<main>
+    <h2>User Management</h2>
+    <p>Add, view, search and manage system users.</p>
+
+    <section class="card">
+        <h3>Add New User</h3>
+
+        <form id="userForm" onsubmit="return addUser()">
+            <fieldset>
+                <legend>User Information</legend>
+
+                <table>
+                    <tr>
+                        <td><label for="name">Full Name:</label></td>
+                        <td><input type="text" id="name" required></td>
+                    </tr>
+                    <tr><td colspan="2"><br></td></tr>
+
+                    <tr>
+                        <td><label for="email">Email:</label></td>
+                        <td><input type="email" id="email" required></td>
+                    </tr>
+                    <tr><td colspan="2"><br></td></tr>
+
+                    <tr>
+                        <td><label for="studentid">Student ID:</label></td>
+                        <td><input type="text" id="studentid" required></td>
+                    </tr>
+                    <tr><td colspan="2"><br></td></tr>
+
+                    <tr>
+                        <td><label for="phone">Phone Number:</label></td>
+                        <td><input type="tel" id="phone"></td>
+                    </tr>
+                    <tr><td colspan="2"><br></td></tr>
+
+                    <tr>
+                        <td><label for="role">Role:</label></td>
+                        <td>
+                            <select id="role">
+                                <option>Student</option>
+                                <option>Faculty</option>
+                                <option>Lost & Found Officer</option>
+                                <option>Claim Verification Officer</option>
+                                <option>Admin</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr><td colspan="2"><br></td></tr>
+
+                    <tr>
+                        <td><label for="password">Password:</label></td>
+                        <td><input type="password" id="password"></td>
+                    </tr>
+                    <tr><td colspan="2"><br></td></tr>
+
+                    <tr>
+                        <td><label for="terms">Accept Terms:</label></td>
+                        <td><input type="checkbox" id="terms" onchange="checkTerms()"> I agree</td>
+                    </tr>
+                    <tr><td colspan="2"><br></td></tr>
+
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button type="submit" id="register" disabled>Add User</button>
+                            <button type="reset">Clear</button>
+                        </td>
+                    </tr>
+                </table>
+
+                <p id="error" class="error"></p>
+            </fieldset>
+        </form>
+    </section>
+
+    <section class="card">
+        <h3>Search Users</h3>
+
+        <input type="text" id="userSearch" placeholder="Search by name or ID"
+               onkeyup="searchTable('userSearch', 'userTable')">
+    </section>
+
+    <section class="card">
+        <h3>Registered Users</h3>
+
+        <table id="userTable">
+            <tr>
+                <th>User ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Student ID</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            <tbody id="userRows"></tbody>
+        </table>
+    </section>
+</main>
+
+<footer>
+    <p>Campus Lost & Found Management System</p>
+</footer>
+<script src="js/admin.js" defer></script>
+</body>
+</html>
