@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manage Found Items">
+    <title>Manage Found Items</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>Campus Lost & Found Management System</h1>
+    <p>Lost & Found Officer Panel</p>
+</header>
+
+<nav>
+    <a href="officer-dashboard.html">Dashboard</a> |
+    <a href="manage-found-items.html">Manage Found Items</a> |
+    <a href="collection-appointments.html">Appointments</a> |
+    <a href="item-handover.html">Item Handover</a> |
+    <a href="handover-history.html">History</a> |
+    <a href="officer-profile.html">My Profile</a> |
+    <a href="#">Logout</a>
+</nav>
+
+<main>
+
+    <section>
+        <h2>Manage Found Items</h2>
+        <p>Add and manage all found items on campus.</p>
+    </section>
+
+    <section>
+        <h3>Add New Found Item</h3>
+
+        <form id="itemForm" onsubmit="return saveItem()">
+
+            <fieldset>
+                <legend>Found Item Information</legend>
+
+                <table>
+                    <tr>
+                        <td><label for="itemName">Item Name:</label></td>
+                        <td><input type="text" id="itemName" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="category">Category:</label></td>
+                        <td>
+                            <select id="category">
+                                <option>Electronics</option>
+                                <option>Documents</option>
+                                <option>Personal Items</option>
+                                <option>Accessories</option>
+                                <option>Bags</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="location">Found Location:</label></td>
+                        <td><input type="text" id="location" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="foundDate">Found Date:</label></td>
+                        <td><input type="date" id="foundDate" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="description">Description:</label></td>
+                        <td><textarea id="description"></textarea></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="itemStatus">Status:</label></td>
+                        <td>
+                            <select id="itemStatus">
+                                <option>In Storage</option>
+                                <option>Pending Collection</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button type="submit">Save Item</button>
+                            <button type="reset">Clear</button>
+                        </td>
+                    </tr>
+                </table>
+
+                <p class="error" id="itemError"></p>
+            </fieldset>
+
+        </form>
+    </section>
+
+  <section>
+    <h3>Search Found Items</h3>
+
+    <input type="text" id="itemSearch"
+    placeholder="Search by item name or ID"
+    onkeyup="searchItems()">
+
+    <button type="button" onclick="searchItems()">Search</button>
+</section>
+
+    <section>
+        <h3>All Found Items</h3>
+
+        <table>
+            <tr>
+                <th>Item ID</th>
+                <th>Item Name</th>
+                <th>Category</th>
+                <th>Location</th>
+                <th>Found Date</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+
+            <tbody id="itemTable"></tbody>
+        </table>
+    </section>
+
+</main>
+
+<footer>
+    <p>Campus Lost & Found Management System</p>
+</footer>
+
+<script src="js/officer.js"></script>
+
+</body>
+</html>

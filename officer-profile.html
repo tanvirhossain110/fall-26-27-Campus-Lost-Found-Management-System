@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Officer Profile">
+    <title>Officer Profile</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>Campus Lost & Found Management System</h1>
+    <p>Lost & Found Officer Panel</p>
+</header>
+
+<nav>
+    <a href="officer-dashboard.html">Dashboard</a> |
+    <a href="manage-found-items.html">Manage Found Items</a> |
+    <a href="collection-appointments.html">Appointments</a> |
+    <a href="item-handover.html">Item Handover</a> |
+    <a href="handover-history.html">History</a> |
+    <a href="officer-profile.html">My Profile</a> |
+    <a href="#">Logout</a>
+</nav>
+
+<main>
+
+    <section>
+        <h2>Officer Profile</h2>
+        <p>View and update your personal information.</p>
+    </section>
+
+    <section>
+        <h3>Profile Information</h3>
+
+        <form id="profileForm" onsubmit="return updateProfile()">
+
+            <fieldset>
+                <legend>Personal Information</legend>
+
+                <table>
+                    <tr>
+                        <td><label for="officerId">Officer ID:</label></td>
+                        <td><input type="text" id="officerId" value="OFF001" readonly></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="officerName">Full Name:</label></td>
+                        <td><input type="text" id="officerName" value="Rahim Ahmed" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="officerEmail">Email:</label></td>
+                        <td><input type="email" id="officerEmail" value="officer@campus.edu" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="officerPhone">Phone Number:</label></td>
+                        <td><input type="tel" id="officerPhone" value="01700000000" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="officerRole">Role:</label></td>
+                        <td><input type="text" id="officerRole" value="Lost & Found Officer" readonly></td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button type="submit">Update Profile</button>
+                            <button type="reset">Reset</button>
+                        </td>
+                    </tr>
+                </table>
+
+                <p id="profileMessage"></p>
+            </fieldset>
+
+        </form>
+    </section>
+
+    <section>
+        <h3>Change Password</h3>
+
+        <form id="passwordForm" onsubmit="return changePassword()">
+
+            <fieldset>
+                <legend>Password Information</legend>
+
+                <table>
+                    <tr>
+                        <td><label for="currentPassword">Current Password:</label></td>
+                        <td><input type="password" id="currentPassword" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="newPassword">New Password:</label></td>
+                        <td><input type="password" id="newPassword" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="confirmPassword">Confirm Password:</label></td>
+                        <td><input type="password" id="confirmPassword" required></td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button type="submit">Change Password</button>
+                            <button type="reset">Clear</button>
+                        </td>
+                    </tr>
+                </table>
+
+                <p class="error" id="passwordError"></p>
+            </fieldset>
+
+        </form>
+    </section>
+
+</main>
+
+<footer>
+    <p>Campus Lost & Found Management System</p>
+</footer>
+
+<script src="js/officer.js"></script>
+
+</body>
+</html>

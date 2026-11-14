@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lost and Found Officer Dashboard">
+    <title>Officer Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>Campus Lost & Found Management System</h1>
+    <p>Lost & Found Officer Panel</p>
+</header>
+
+<nav>
+    <a href="officer-dashboard.html">Dashboard</a> |
+    <a href="manage-found-items.html">Manage Found Items</a> |
+    <a href="collection-appointments.html">Appointments</a> |
+    <a href="item-handover.html">Item Handover</a> |
+    <a href="handover-history.html">History</a> |
+    <a href="officer-profile.html">My Profile</a> |
+    <a href="#">Logout</a>
+</nav>
+
+<main>
+
+    <section>
+        <h2>Dashboard</h2>
+        <p>Welcome to Lost & Found Management System.</p>
+
+        <a href="manage-found-items.html">
+            <button>Add Found Item</button>
+        </a>
+
+        <a href="collection-appointments.html">
+            <button>Appointments</button>
+        </a>
+    </section>
+
+    <section>
+        <h2>System Overview</h2>
+
+        <div class="card-container">
+            <div class="card">
+                <h3>Total Found Items</h3>
+                <h2 id="totalItems">0</h2>
+            </div>
+
+            <div class="card">
+                <h3>Items in Storage</h3>
+                <h2 id="storageItems">0</h2>
+            </div>
+
+            <div class="card">
+                <h3>Pending Collection</h3>
+                <h2 id="pendingItems">0</h2>
+            </div>
+
+            <div class="card">
+                <h3>Successfully Handed Over</h3>
+                <h2 id="handedItems">0</h2>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Recent Found Items</h2>
+
+        <table>
+            <tr>
+                <th>Item ID</th>
+                <th>Item Name</th>
+                <th>Category</th>
+                <th>Found Location</th>
+                <th>Found Date</th>
+                <th>Status</th>
+            </tr>
+            <tbody id="recentItems"></tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>Quick Access</h2>
+
+        <ul>
+            <li><a href="manage-found-items.html">Manage Found Items</a></li>
+            <li><a href="collection-appointments.html">Collection Appointments</a></li>
+            <li><a href="item-handover.html">Complete Item Handover</a></li>
+            <li><a href="handover-history.html">View Handover History</a></li>
+        </ul>
+    </section>
+
+</main>
+
+<footer>
+    <p>Campus Lost & Found Management System</p>
+</footer>
+
+<script src="js/officer.js"></script>
+
+</body>
+</html>

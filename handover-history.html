@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Handover History">
+    <title>Handover History</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>Campus Lost & Found Management System</h1>
+    <p>Lost & Found Officer Panel</p>
+</header>
+
+<nav>
+    <a href="officer-dashboard.html">Dashboard</a> |
+    <a href="manage-found-items.html">Manage Found Items</a> |
+    <a href="collection-appointments.html">Appointments</a> |
+    <a href="item-handover.html">Item Handover</a> |
+    <a href="handover-history.html">History</a> |
+    <a href="officer-profile.html">My Profile</a> |
+    <a href="#">Logout</a>
+</nav>
+
+<main>
+
+    <section>
+        <h2>Handover History</h2>
+        <p>View all completed item handover records.</p>
+    </section>
+
+    <section>
+        <h3>Search Handover Records</h3>
+
+        <input type="text" id="historySearch"
+        placeholder="Search by student name or ID"
+        onkeyup="searchHistory()">
+
+        <button type="button" onclick="searchHistory()">Search</button>
+    </section>
+
+    <section>
+        <h3>All Handover Records</h3>
+
+        <p>Total Handover Records: <span id="historyCount">0</span></p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Handover ID</th>
+                    <th>Item ID</th>
+                    <th>Item Name</th>
+                    <th>Receiver Name</th>
+                    <th>Student ID</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Verification</th>
+                </tr>
+            </thead>
+
+            <tbody id="historyTable"></tbody>
+        </table>
+    </section>
+
+</main>
+
+<footer>
+    <p>Campus Lost & Found Management System</p>
+</footer>
+
+<script src="js/officer.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Found Item Handover">
+    <title>Item Handover</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>Campus Lost & Found Management System</h1>
+    <p>Lost & Found Officer Panel</p>
+</header>
+
+<nav>
+    <a href="officer-dashboard.html">Dashboard</a> |
+    <a href="manage-found-items.html">Manage Found Items</a> |
+    <a href="collection-appointments.html">Appointments</a> |
+    <a href="item-handover.html">Item Handover</a> |
+    <a href="handover-history.html">History</a> |
+    <a href="officer-profile.html">My Profile</a> |
+    <a href="#">Logout</a>
+</nav>
+
+<main>
+
+    <section>
+        <h2>Item Handover</h2>
+        <p>Complete the handover process after verifying the student's information.</p>
+    </section>
+
+    <section>
+        <h3>Handover Information</h3>
+
+        <form id="handoverForm" onsubmit="return saveHandover()">
+
+            <fieldset>
+                <legend>Student and Item Details</legend>
+
+                <table>
+                    <tr>
+                        <td><label for="handoverItemId">Item ID:</label></td>
+                        <td><input type="text" id="handoverItemId" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="handoverItemName">Item Name:</label></td>
+                        <td><input type="text" id="handoverItemName" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="receiverName">Receiver Name:</label></td>
+                        <td><input type="text" id="receiverName" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="receiverId">Student ID:</label></td>
+                        <td><input type="text" id="receiverId" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="receiverPhone">Phone Number:</label></td>
+                        <td><input type="tel" id="receiverPhone" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="handoverDate">Handover Date:</label></td>
+                        <td><input type="date" id="handoverDate" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="handoverTime">Handover Time:</label></td>
+                        <td><input type="time" id="handoverTime" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="verification">Ownership Verification:</label></td>
+                        <td>
+                            <input type="radio" name="verification" value="Verified" required>
+                            Verified
+
+                            <input type="radio" name="verification" value="Not Verified">
+                            Not Verified
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="handoverNote">Remarks:</label></td>
+                        <td><textarea id="handoverNote"></textarea></td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button type="submit">Complete Handover</button>
+                            <button type="reset">Clear</button>
+                        </td>
+                    </tr>
+                </table>
+
+                <p class="error" id="handoverError"></p>
+            </fieldset>
+
+        </form>
+    </section>
+
+    <section>
+        <h3>Handover Guidelines</h3>
+
+        <ul>
+            <li>Check the Student ID before handing over the item.</li>
+            <li>Verify the ownership information.</li>
+            <li>Confirm the item name and Item ID.</li>
+            <li>Record the handover date and time.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>Quick Access</h3>
+        <a href="handover-history.html">View Handover History</a>
+    </section>
+
+</main>
+
+<footer>
+    <p>Campus Lost & Found Management System</p>
+</footer>
+
+<script src="js/officer.js"></script>
+
+</body>
+</html>
