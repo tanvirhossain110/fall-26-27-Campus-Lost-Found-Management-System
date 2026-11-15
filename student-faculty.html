@@ -98,7 +98,7 @@
         <div class="col-wide">
           <div class="card">
             <h3>My lost reports</h3>
-            <div class="search-bar">
+            <div class="search-bar" id="lostMatches">
               <input type="text" id="lostSearch" placeholder="Search by item, location or id..." onkeyup="renderLost()">
               <select id="lostStatusFilter" onchange="renderLost()">
                 <option value="All">Any status</option>
@@ -338,7 +338,8 @@
   <footer class="footer">
     &copy; 2026 Campus Lost &amp; Found Management System &middot; CSC 3215 Web Technologies
   </footer>
-
+  
+  <script src="js/student-faculty.js"></script>
 </body>
 </html>
 
