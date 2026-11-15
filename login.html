@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Login to the Campus Lost and Found Management System">
+  <title>Login | Campus Lost &amp; Found</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">Campus<span>Lost&amp;Found</span></a>
+    <div class="user-info">
+      <a href="login.html" class="btn btn-small btn-light">Login</a>
+      <a href="register.html" class="btn btn-small">Register</a>
+    </div>
+  </header>
+
+  <nav class="topnav">
+    <a href="index.html">Home</a>
+    <a href="index.html#search">Search Items</a>
+    <a href="index.html#who">Who It's For</a>
+    <a href="index.html#how">How It Works</a>
+    <a href="index.html#hours">Office Hours</a>
+    <a href="index.html#contact">Contact Us</a>
+  </nav>
+
+  <main class="container">
+    <div class="auth-box">
+
+      <div class="card">
+        <h2 class="page-title">Welcome back</h2>
+        <p class="page-subtitle">One login for everyone: admins, officers, students and faculty.
+          We will open the right dashboard for your account.</p>
+
+        <div id="loginMessage" class="message"></div>
+
+       <form id="loginForm" action="index.html" method="get" onsubmit="return validateLogin()">
+          <fieldset>
+            <legend>Your account</legend>
+            <table class="form-table">
+              <tr>
+                <td><label for="username">Username or Email:</label></td>
+                <td>
+                  <input type="text" id="username" name="username" placeholder="e.g. student or rahim@student.edu">
+                  <span class="error" id="usernameError"></span>
+                </td>
+              </tr>
+              <tr>
+                <td><label for="password">Password:</label></td>
+                <td>
+                  <input type="password" id="password" placeholder="Your password">
+                  <span class="error" id="passwordError"></span>
+                  <input type="checkbox" id="showPassword" onchange="togglePassword()">
+                  <label for="showPassword" class="option-label">Show password</label>
+                </td>
+              </tr>
+            </table>
+          </fieldset>
+
+          <input type="submit" class="btn btn-block" value="Login">
+        </form>
+
+        <p class="auth-switch">Don't have an account? <a href="register.html">Register here</a></p>
+      </div>
+
+      <div class="card">
+        <h3>Demo accounts</h3>
+        <p class="hint">Click "Use" to fill the form, then press Login.</p>
+        <table class="demo-accounts">
+          <tr>
+            <td><span class="badge admin">Admin</span></td>
+            <td>admin / admin1234</td>
+            <td><button type="button" class="btn btn-small" onclick="fillDemo('admin', 'admin1234')">Use</button></td>
+          </tr>
+          <tr>
+            <td><span class="badge librarian">Officer</span></td>
+            <td>officer / officer123</td>
+            <td><button type="button" class="btn btn-small" onclick="fillDemo('officer', 'officer123')">Use</button></td>
+          </tr>
+          <tr>
+            <td><span class="badge student">Student</span></td>
+            <td>student / student123</td>
+            <td><button type="button" class="btn btn-small" onclick="fillDemo('student', 'student123')">Use</button></td>
+          </tr>
+          <tr>
+            <td><span class="badge visitor">Faculty</span></td>
+            <td>faculty / faculty123</td>
+            <td><button type="button" class="btn btn-small" onclick="fillDemo('faculty', 'faculty123')">Use</button></td>
+          </tr>
+          <tr>
+            <td><span class="badge orange">Pending</span></td>
+            <td>jamal / jamal1234</td>
+            <td><button type="button" class="btn btn-small btn-secondary" onclick="fillDemo('jamal', 'jamal1234')">Use</button></td>
+          </tr>
+        </table>
+        <p class="hint">The last one is an officer who registered but is not approved yet, so login is refused.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    &copy; 2026 Campus Lost &amp; Found Management System &middot; CSC 3215 Web Technologies
+  </footer>
+
+</body>
+</html>
