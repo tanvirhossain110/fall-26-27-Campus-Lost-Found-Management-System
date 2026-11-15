@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Admin Profile">
+    <meta name="author" content="Campus Lost & Found Management System">
+    <title>Admin Profile</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+</head>
+<body>
+
+<header>
+    <h1>Campus Lost & Found Management System</h1>
+    <h2>Admin Panel</h2>
+</header>
+
+<nav>
+    <a href="admin-dashboard.html">Dashboard</a>
+    <a href="user-management.html">User Management</a>
+    <a href="role-management.html">Role Management</a>
+    <a href="category-management.html">Category Management</a>
+    <a href="campus-locations.html">Campus Locations</a>
+    <a href="reports-analytics.html">Reports & Analytics</a>
+    <a href="admin-profile.html">Admin Profile</a>
+</nav>
+
+<main>
+    <h2>Admin Profile</h2>
+    <p>View and update your personal account information.</p>
+
+    <section class="card">
+        <h3>Profile Information</h3>
+
+        <form onsubmit="showMessage('profileMessage', 'Profile updated successfully.'); return false;">
+            <fieldset>
+                <legend>Admin Information</legend>
+
+                <table>
+                    <tr>
+                        <td><label for="adminid">Admin ID:</label></td>
+                        <td><input type="text" id="adminid" value="ADM001" readonly></td>
+                    </tr>
+                    <tr><td colspan="2"><br></td></tr>
+
+                    <tr>
+                        <td><label for="adminname">Full Name:</label></td>
+                        <td><input type="text" id="adminname" value="Tanvir Hossain" required></td>
+                    </tr>
+                    <tr><td colspan="2"><br></td></tr>
+
+                    <tr>
+                        <td><label for="adminemail">Email:</label></td>
+                        <td><input type="email" id="adminemail" value="admin@campus.edu" required></td>
+                    </tr>
+                    <tr><td colspan="2"><br></td></tr>
+
+                    <tr>
+                        <td><label for="adminphone">Phone Number:</label></td>
+                        <td><input type="tel" id="adminphone" value="01700000000"></td>
+                    </tr>
+                    <tr><td colspan="2"><br></td></tr>
+
+                    <tr>
+                        <td><label for="adminrole">Role:</label></td>
+                        <td><input type="text" id="adminrole" value="Administrator" readonly></td>
+                    </tr>
+                    <tr><td colspan="2"><br></td></tr>
+
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button type="submit">Update Profile</button>
+                            <button type="reset">Clear</button>
+                        </td>
+                    </tr>
+                </table>
+
+                <p id="profileMessage"></p>
+            </fieldset>
+        </form>
+    </section>
+
+    <section class="card">
+        <h3>Change Password</h3>
+
+        <form onsubmit="return changePassword()">
+            <fieldset>
+                <legend>Password Information</legend>
+
+                <table>
+                    <tr>
+                        <td><label for="currentpassword">Current Password:</label></td>
+                        <td><input type="password" id="currentpassword"></td>
+                    </tr>
+                    <tr><td colspan="2"><br></td></tr>
+
+                    <tr>
+                        <td><label for="newpassword">New Password:</label></td>
+                        <td><input type="password" id="newpassword"></td>
+                    </tr>
+                    <tr><td colspan="2"><br></td></tr>
+
+                    <tr>
+                        <td><label for="confirmpassword">Confirm Password:</label></td>
+                        <td><input type="password" id="confirmpassword"></td>
+                    </tr>
+                    <tr><td colspan="2"><br></td></tr>
+
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button type="submit">Change Password</button>
+                            <button type="reset">Clear</button>
+                        </td>
+                    </tr>
+                </table>
+
+                <p id="passwordError" class="error"></p>
+            </fieldset>
+        </form>
+    </section>
+
+    <section class="card">
+        <h3>Account Information</h3>
+
+        <table>
+            <tr>
+                <th>Account Type</th>
+                <td>Administrator</td>
+            </tr>
+            <tr>
+                <th>Account Status</th>
+                <td>Active</td>
+            </tr>
+            <tr>
+                <th>Last Login</th>
+                <td>14-11-2026</td>
+            </tr>
+        </table>
+    </section>
+</main>
+
+<footer>
+    <p>Campus Lost & Found Management System</p>
+</footer>
+<script src="js/admin.js" defer></script>
+</body>
+</html>

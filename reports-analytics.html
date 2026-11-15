@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Reports and Analytics">
+    <meta name="author" content="Campus Lost & Found Management System">
+    <title>Reports & Analytics</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+</head>
+<body>
+
+<header>
+    <h1>Campus Lost & Found Management System</h1>
+    <h2>Admin Panel</h2>
+</header>
+
+<nav>
+    <a href="admin-dashboard.html">Dashboard</a>
+    <a href="user-management.html">User Management</a>
+    <a href="role-management.html">Role Management</a>
+    <a href="category-management.html">Category Management</a>
+    <a href="campus-locations.html">Campus Locations</a>
+    <a href="reports-analytics.html">Reports & Analytics</a>
+    <a href="admin-profile.html">Admin Profile</a>
+</nav>
+
+<main>
+    <h2>Reports & Analytics</h2>
+    <p>View system reports and analyze lost and found activities.</p>
+
+    <section class="dashboard-cards">
+        <div class="dashboard-card">
+            <h3>Total Lost Reports</h3>
+            <h2>120</h2>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Total Found Reports</h3>
+            <h2>95</h2>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Pending Claims</h3>
+            <h2>15</h2>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Resolved Claims</h3>
+            <h2>70</h2>
+        </div>
+    </section>
+
+    <section class="card">
+        <h3>Reports by Category</h3>
+
+        <table>
+            <tr>
+                <th>Category</th>
+                <th>Lost Items</th>
+                <th>Found Items</th>
+                <th>Total Items</th>
+            </tr>
+            <tr>
+                <td>Electronics</td>
+                <td>15</td>
+                <td>10</td>
+                <td>25</td>
+            </tr>
+            <tr>
+                <td>Documents</td>
+                <td>10</td>
+                <td>8</td>
+                <td>18</td>
+            </tr>
+            <tr>
+                <td>Personal Items</td>
+                <td>9</td>
+                <td>6</td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <td>Accessories</td>
+                <td>7</td>
+                <td>5</td>
+                <td>12</td>
+            </tr>
+        </table>
+    </section>
+
+    <section class="card">
+        <h3>Monthly Reports</h3>
+
+        <table>
+            <tr>
+                <th>Month</th>
+                <th>Lost Reports</th>
+                <th>Found Reports</th>
+                <th>Resolved Claims</th>
+            </tr>
+            <tr>
+                <td>August</td>
+                <td>30</td>
+                <td>22</td>
+                <td>18</td>
+            </tr>
+            <tr>
+                <td>September</td>
+                <td>40</td>
+                <td>35</td>
+                <td>25</td>
+            </tr>
+            <tr>
+                <td>October</td>
+                <td>50</td>
+                <td>38</td>
+                <td>27</td>
+            </tr>
+        </table>
+    </section>
+
+    <section class="card">
+        <h3>Generate Report</h3>
+
+        <form onsubmit="reportType(); return false;">
+            <fieldset>
+                <legend>Report Information</legend>
+
+                <table>
+                    <tr>
+                        <td><label for="reportType">Report Type:</label></td>
+                        <td>
+                            <select id="reportType">
+                                <option>All Reports</option>
+                                <option>Lost Items</option>
+                                <option>Found Items</option>
+                                <option>Claims</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr><td colspan="2"><br></td></tr>
+
+                    <tr>
+                        <td><label for="fromDate">From Date:</label></td>
+                        <td><input type="date" id="fromDate"></td>
+                    </tr>
+                    <tr><td colspan="2"><br></td></tr>
+
+                    <tr>
+                        <td><label for="toDate">To Date:</label></td>
+                        <td><input type="date" id="toDate"></td>
+                    </tr>
+                    <tr><td colspan="2"><br></td></tr>
+
+                    <tr>
+                        <td></td>
+                        <td><button type="submit">Generate Report</button></td>
+                    </tr>
+                </table>
+            </fieldset>
+        </form>
+
+        <p id="reportResult"></p>
+    </section>
+</main>
+
+<footer>
+    <p>Campus Lost & Found Management System</p>
+</footer>
+<script src="js/admin.js" defer></script>
+</body>
+</html>
