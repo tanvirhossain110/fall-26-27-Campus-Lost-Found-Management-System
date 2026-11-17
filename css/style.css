@@ -1,0 +1,136 @@
+/* Claim Verification Officer Project CSS */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333333;
+    background-color: #F4F6F9;
+    margin: 30px;
+}
+
+/* Heading Style */
+h1, h2, h3 {
+    color: #17365D;
+    margin-bottom: 12px;
+}
+
+h1 {
+    background-color: #17365D;
+    color: white;
+    padding: 18px;
+    border-radius: 8px;
+}
+
+h2 {
+    margin-top: 20px;
+}
+
+p {
+    margin-bottom: 12px;
+}
+
+/* Horizontal Line */
+hr {
+    margin: 18px 0;
+    border: 1px solid #D9E1EA;
+}
+
+/* Link Style */
+a {
+    color: #1D5FA7;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #0D3B66;
+}
+
+/* List Style */
+ul {
+    margin: 12px 0 20px 25px;
+}
+
+li {
+    padding: 8px;
+}
+
+/* Table Style */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    margin-top: 16px;
+    font-size: 15px;
+}
+
+th {
+    background-color: #17365D;
+    color: white;
+    text-align: left;
+    padding: 12px;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #D9E1EA;
+}
+
+tr:nth-child(even) {
+    background-color: #F0F4F8;
+}
+
+tr:hover {
+    background-color: #E4EDF7;
+}
+
+/* Form Style */
+form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 16px;
+}
+
+label {
+    font-weight: bold;
+    color: #333333;
+}
+
+select, textarea {
+    width: 100%;
+    padding: 9px 10px;
+    border: 1px solid #B8C4D1;
+    border-radius: 6px;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    background-color: white;
+    margin-top: 6px;
+}
+
+select:focus, textarea:focus {
+    outline: 2px solid #6B9ACB;
+    border-color: #6B9ACB;
+}
+
+/* Button Style */
+button, input[type="submit"] {
+    background-color: #17365D;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #2563A6;
+}
