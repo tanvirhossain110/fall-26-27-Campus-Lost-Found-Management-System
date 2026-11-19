@@ -15,6 +15,69 @@ header {
     padding: 20px;
 }
 
+.logo {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: #1abc9c;
+}
+
+.logo:hover {
+    color: white;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+}
+
+.hero {
+    background-color: #243447;
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.hero h1 {
+    color: white;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    color: #d0d6dc;
+    max-width: 650px;
+    margin: 0 auto 20px auto;
+}
+
+.hero-search {
+    max-width: 640px;
+    margin: 20px auto 0 auto;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 8px;
+}
+
+.hero-note {
+    font-size: 0.9rem;
+    color: #d0d6dc;
+    margin-top: 10px;
+}
+
+.hero-link {
+    color: #1abc9c;
+}
+
+.hero-link:hover {
+    color: white;
+}
+
 nav {
     background-color: #34495e;
     padding: 15px;
@@ -133,6 +196,32 @@ tr:nth-child(even) {
     color: red;
 }
 
+.hint {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.option-label {
+    font-weight: normal;
+    margin-right: 12px;
+}
+
+.result-count {
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.empty-row {
+    text-align: center;
+    color: #888;
+    padding: 20px;
+}
+
 .message {
     padding: 12px;
     margin: 10px 0;
@@ -147,6 +236,73 @@ footer {
     padding: 15px;
     text-align: center;
     margin-top: 30px;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #2471a3;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background-color: #1abc9c;
+    color: white;
+}
+
+.btn:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    background-color: #6C757D;
+}
+
+.btn-secondary:hover {
+    background-color: #868E96;
+}
+
+.btn-success {
+    background-color: #2E7D32;
+}
+
+.btn-success:hover {
+    background-color: #43A047;
+}
+
+.btn-danger {
+    background-color: #C62828;
+}
+
+.btn-danger:hover {
+    background-color: #E53935;
+}
+
+.btn-light {
+    background-color: white;
+    color: #243447;
+}
+
+.btn-light:hover {
+    background-color: #d0d6dc;
+    color: #243447;
+}
+
+.btn-small {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+}
+
+.btn-block {
+    width: 100%;
+    padding: 11px;
+    font-size: 1rem;
 }
 
 @media screen and (max-width: 700px) {
