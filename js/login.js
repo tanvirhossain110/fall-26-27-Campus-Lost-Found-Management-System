@@ -24,8 +24,7 @@ function validateLogin() {
   if (isValid === false) {
     return false;
   }
-
-  // Find the account: the username OR the email can be used
+ 	
   let foundUser = null;
   for (const user of users) {
     let sameName = user.username.toLowerCase() === username.toLowerCase();
@@ -55,10 +54,10 @@ function validateLogin() {
   let form = document.getElementById("loginForm");
   switch (foundUser.role) {
     case "Admin":
-      form.action = "admin.html";
+      form.action = "admin-dashboard.html";
       break;
     case "Officer":
-      form.action = "officer.html";
+      form.action = "officer-dashboard.html";
       break;
     case "Student":
     case "Faculty":
