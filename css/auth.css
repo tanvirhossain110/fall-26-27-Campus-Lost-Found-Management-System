@@ -245,6 +245,8 @@ footer {
     border: none;
     padding: 10px 16px;
     border-radius: 5px;
+    font-family: inherit;
+    font-size: 0.95rem;
     text-decoration: none;
     cursor: pointer;
     transition: 0.3s;
@@ -253,6 +255,7 @@ footer {
 .btn:hover {
     background-color: #1abc9c;
     color: white;
+    transform: scale(1.03);
 }
 
 .btn:disabled {
