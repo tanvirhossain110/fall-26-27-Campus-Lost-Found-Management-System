@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Student and Faculty dashboard of the Campus Lost and Found Management System">
   <title>Student / Faculty Dashboard | Campus Lost &amp; Found</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/student-faculty.css">
 </head>
 <body>
 
@@ -26,9 +26,8 @@
 
   <main class="container">
 
-    <!-- =========================================================
-         LOST ITEM REPORT: Create, Read, Update, Delete and Search
-         ========================================================= -->
+    <!-- LOST ITEM REPORT: Create, Read, Update, Delete and Search -->
+    
     <section id="lostSection" class="page-section">
       <h2 class="page-title">Lost Item Report</h2>
       <p class="page-subtitle">Report something you have lost on campus. The Lost &amp; Found Officer will match it with found items.</p>
@@ -89,8 +88,11 @@
                   </tr>
                 </table>
               </fieldset>
+	      <br>
               <input type="submit" id="lostSaveButton" class="btn" value="Submit Report">
-              <button type="button" class="btn btn-secondary" onclick="resetLostForm()">Cancel</button>
+	      <br>
+	      <br>
+              <input type="reset" class="btn btn-secondary" value="Start Again" onclick="resetLostForm()">
             </form>
           </div>
         </div>
@@ -122,9 +124,8 @@
     </section>
 
 
-    <!-- =========================================================
-         FOUND ITEM POST: Create and browse found items
-         ========================================================= -->
+    <!-- FOUND ITEM POST: Create and browse found items -->
+    
     <section id="foundSection" class="page-section">
       <h2 class="page-title">Found Item Post</h2>
       <p class="page-subtitle">Found something? Post it so the owner can claim it. Hand the item to the Lost &amp; Found Officer afterwards.</p>
@@ -232,9 +233,8 @@
     </section>
 
 
-    <!-- =========================================================
-         SEARCH & CLAIM REQUEST: find an item and submit a claim
-         ========================================================= -->
+    <!-- SEARCH & CLAIM REQUEST: find an item and submit a claim -->
+
     <section id="claimSection" class="page-section">
       <h2 class="page-title">Search &amp; Claim Request</h2>
       <p class="page-subtitle">Search the found item inventory and claim what belongs to you.</p>
@@ -338,9 +338,10 @@
   <footer class="footer">
     &copy; 2026 Campus Lost &amp; Found Management System &middot; CSC 3215 Web Technologies
   </footer>
-  
+
+  <script src="js/data.js"></script>
+  <script src="js/common.js"></script>
   <script src="js/student-faculty.js"></script>
+
 </body>
 </html>
-
-

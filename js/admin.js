@@ -1,98 +1,93 @@
+
 let adminPassword = "Admin@123";
 
 let users = [
-    {id: "U001", name: "Rahim Ahmed", email: "rahim@gmail.com", studentid: "24-10001-1", role: "Student", status: "Active"},
-    {id: "U002", name: "Karim Hasan", email: "karim@gmail.com", studentid: "24-10002-1", role: "Faculty", status: "Active"},
-    {id: "U003", name: "Tanvir Hossain", email: "tanvir@gmail.com", studentid: "24-10003-1", role: "Admin", status: "Active"}
+    {id:"U001", name:"Rahim Ahmed", email:"rahim@gmail.com", studentid:"24-10001-1", role:"Student", status:"Active"},
+    {id:"U002", name:"Karim Hasan", email:"karim@gmail.com", studentid:"24-10002-1", role:"Faculty", status:"Active"}
 ];
 
 let categories = [
-    {id: "C001", name: "Electronics", description: "Mobile, Laptop, Charger"},
-    {id: "C002", name: "Documents", description: "ID Card, Certificates, Books"},
-    {id: "C003", name: "Personal Items", description: "Wallet, Bag, Keys"}
+    {id:"C001", name:"Electronics", description:"Electronic devices"},
+    {id:"C002", name:"Documents", description:"Cards and documents"},
+    {id:"C003", name:"Personal Items", description:"Personal belongings"}
 ];
 
 let roles = [
-    {id: "R001", name: "Student / Faculty", description: "Report and search items"},
-    {id: "R002", name: "Lost & Found Officer", description: "Manage found items"},
-    {id: "R003", name: "Claim Verification Officer", description: "Verify ownership claims"},
-    {id: "R004", name: "Admin", description: "Manage complete system"}
+    {id:"R001", name:"Student", description:"Can report and claim items"},
+    {id:"R002", name:"Lost & Found Officer", description:"Manages found items"}
 ];
 
 let locations = [
-    {id: "L001", name: "Library", building: "Building A", floor: "2nd Floor"},
-    {id: "L002", name: "Cafeteria", building: "Building B", floor: "Ground Floor"},
-    {id: "L003", name: "Computer Lab", building: "Building C", floor: "3rd Floor"}
+    {id:"L001", name:"Library", building:"Main Building", floor:"1"},
+    {id:"L002", name:"Cafeteria", building:"Food Court", floor:"Ground"}
 ];
 
-let editingUser = -1;
-let editingCategory = -1;
-let editingRole = -1;
-let editingLocation = -1;
+let editIndex = -1;
 
+
+// Show Message
 
 function showMessage(id, message) {
-    document.getElementById(id).innerHTML = message;
-}
+    let element = document.getElementById(id);
 
-function searchTable(inputId, tableId) {
-    let search = document.getElementById(inputId).value.toLowerCase();
-
-    for (let i = 0; i < 100; i++) {
-        let row = document.getElementById("row" + i);
-
-        if (row !== null) {
-            if (row.innerHTML.toLowerCase().indexOf(search) === -1) {
-                row.style.display = "none";
-            } else {
-                row.style.display = "table-row";
-            }
-        }
+    if (element) {
+        element.innerHTML = message;
     }
 }
+
+
+// Search Table
+
+function searchTable(inputId, tableId) {
+    let input = document.getElementById(inputId);
+    let table = document.getElementById(tableId);
+
+    if (!input || !table) {
+        return;
+    }
+
+    let filter = input.value.toLowerCase();
+    let rows = table.getElementsByTagName("tr");
+
+    for (let i = 1; i < rows.length; i++) {
+        rows[i].style.display =
+            rows[i].innerHTML.toLowerCase().indexOf(filter) > -1 ? "" : "none";
+    }
+}
+
+
+// Check Terms
 
 function checkTerms() {
     let terms = document.getElementById("terms");
     let register = document.getElementById("register");
 
-    if (terms.checked) {
-        register.disabled = false;
-    } else {
-        register.disabled = true;
+    if (terms && register) {
+        register.disabled = !terms.checked;
     }
 }
 
-function renderUsers() {
-    let output = "";
 
-    for (let i = 0; i < users.length; i++) {
-        output += "<tr id='row" + i + "'>";
-        output += "<td>" + users[i].id + "</td>";
-        output += "<td>" + users[i].name + "</td>";
-        output += "<td>" + users[i].email + "</td>";
-        output += "<td>" + users[i].studentid + "</td>";
-        output += "<td>" + users[i].role + "</td>";
-        output += "<td>" + users[i].status + "</td>";
-        output += "<td><button type='button' onclick='editUser(" + i + ")'>Edit</button> ";
-        output += "<button type='button' onclick='deleteUser(" + i + ")'>Delete</button></td>";
-        output += "</tr>";
-    }
-
-    document.getElementById("userRows").innerHTML = output;
-}
+// Add and Update User
 
 function addUser() {
-    let name = document.getElementById("name").value;
-    let email = document.getElementById("email").value;
-    let studentid = document.getElementById("studentid").value;
+    let name = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let studentid = document.getElementById("studentid").value.trim();
     let role = document.getElementById("role").value;
+    let terms = document.getElementById("terms").checked;
 
     if (name === "" || email === "" || studentid === "") {
-        showMessage("error", "Please fill in all required fields.");
+        showMessage("error", "Please fill all required fields.");
         return false;
     }
 
-    if (editingUser === -1) {
+    if (!terms) {
+        showMessage("error", "Please accept the terms and conditions.");
+        return false;
+    }
+
+    if (editIndex === -1) {
         users.push({
             id: "U00" + (users.length + 1),
             name: name,
@@ -101,63 +96,97 @@ function addUser() {
             role: role,
             status: "Active"
         });
+    }
+    else {
+        users[editIndex].name = name;
+        users[editIndex].email = email;
+        users[editIndex].studentid = studentid;
+        users[editIndex].role = role;
 
-        showMessage("error", "User added successfully.");
-    } else {
-        users[editingUser].name = name;
-        users[editingUser].email = email;
-        users[editingUser].studentid = studentid;
-        users[editingUser].role = role;
-
-        editingUser = -1;
-        showMessage("error", "User updated successfully.");
+        editIndex = -1;
     }
 
-    renderUsers();
     document.getElementById("userForm").reset();
-    document.getElementById("register").disabled = true;
-    document.getElementById("register").innerHTML = "Add User";
+
+    checkTerms();
+    renderUsers();
+
+    showMessage("error", "User saved successfully.");
 
     return false;
 }
 
-function editUser(index) {
-    editingUser = index;
 
-    document.getElementById("name").value = users[index].name;
-    document.getElementById("email").value = users[index].email;
-    document.getElementById("studentid").value = users[index].studentid;
-    document.getElementById("role").value = users[index].role;
+// Display Users
 
-    document.getElementById("terms").checked = true;
-    document.getElementById("register").disabled = false;
-    document.getElementById("register").innerHTML = "Update User";
-    showMessage("error", "Edit the information and click Update User.");
-}
+function renderUsers() {
+    let body = document.getElementById("userRows");
 
-function deleteUser(index) {
-    users = users.slice(0, index).concat(users.slice(index + 1));
-    renderUsers();
-}
-
-function renderCategories() {
-    let output = "";
-
-    for (let i = 0; i < categories.length; i++) {
-        output += "<tr id='row" + i + "'>";
-        output += "<td>" + categories[i].id + "</td>";
-        output += "<td>" + categories[i].name + "</td>";
-        output += "<td>" + categories[i].description + "</td>";
-        output += "<td><button type='button' onclick='editCategory(" + i + ")'>Edit</button> ";
-        output += "<button type='button' onclick='deleteCategory(" + i + ")'>Delete</button></td>";
-        output += "</tr>";
+    if (!body) {
+        return;
     }
 
-    document.getElementById("categoryRows").innerHTML = output;
+    body.innerHTML = "";
+
+    for (let i = 0; i < users.length; i++) {
+        body.innerHTML +=
+            "<tr>" +
+            "<td>" + users[i].id + "</td>" +
+            "<td>" + users[i].name + "</td>" +
+            "<td>" + users[i].email + "</td>" +
+            "<td>" + users[i].studentid + "</td>" +
+            "<td>" + users[i].role + "</td>" +
+            "<td>" + users[i].status + "</td>" +
+            "<td>" +
+            "<button onclick='editUser(" + i + ")'>Edit</button>" +
+            "<button onclick='deleteUser(" + i + ")'>Delete</button>" +
+            "</td>" +
+            "</tr>";
+    }
 }
 
+
+// Edit User
+
+function editUser(i) {
+    document.getElementById("name").value = users[i].name;
+    document.getElementById("email").value = users[i].email;
+    document.getElementById("studentid").value = users[i].studentid;
+    document.getElementById("role").value = users[i].role;
+
+    editIndex = i;
+
+    document.getElementById("terms").checked = true;
+    checkTerms();
+
+    showMessage("error", "You are editing User ID: " + users[i].id);
+}
+
+
+// Delete User
+
+function deleteUser(i) {
+    users.splice(i, 1);
+
+    if (editIndex === i) {
+        editIndex = -1;
+        document.getElementById("userForm").reset();
+        checkTerms();
+    }
+    else if (editIndex > i) {
+        editIndex--;
+    }
+
+    renderUsers();
+
+    showMessage("error", "User deleted successfully.");
+}
+
+
+// Add Category
+
 function addCategory() {
-    let name = document.getElementById("categoryname").value;
+    let name = document.getElementById("categoryname").value.trim();
     let description = document.getElementById("description").value;
 
     if (name === "") {
@@ -165,62 +194,76 @@ function addCategory() {
         return false;
     }
 
-    if (editingCategory === -1) {
+    if (editIndex === -1) {
         categories.push({
             id: "C00" + (categories.length + 1),
             name: name,
             description: description
         });
-
-        showMessage("error", "Category added successfully.");
-    } else {
-        categories[editingCategory].name = name;
-        categories[editingCategory].description = description;
-
-        editingCategory = -1;
-        showMessage("error", "Category updated successfully.");
+    }
+    else {
+        categories[editIndex].name = name;
+        categories[editIndex].description = description;
+        editIndex = -1;
     }
 
-    renderCategories();
     document.getElementById("categoryForm").reset();
-    document.getElementById("categorySubmit").innerHTML = "Add Category";
+    renderCategories();
+
+    showMessage("error", "Category saved successfully.");
 
     return false;
 }
 
-function editCategory(index) {
-    editingCategory = index;
 
-    document.getElementById("categoryname").value = categories[index].name;
-    document.getElementById("description").value = categories[index].description;
-    document.getElementById("categorySubmit").innerHTML = "Update Category";
+// Display Categories
 
-    showMessage("error", "Edit the information and click Update Category.");
+function renderCategories() {
+    let body = document.getElementById("categoryRows");
+
+    if (!body) {
+        return;
+    }
+
+    body.innerHTML = "";
+
+    for (let i = 0; i < categories.length; i++) {
+        body.innerHTML +=
+            "<tr>" +
+            "<td>" + categories[i].id + "</td>" +
+            "<td>" + categories[i].name + "</td>" +
+            "<td>" + categories[i].description + "</td>" +
+            "<td>" +
+            "<button onclick='editCategory(" + i + ")'>Edit</button>" +
+            "<button onclick='deleteCategory(" + i + ")'>Delete</button>" +
+            "</td>" +
+            "</tr>";
+    }
 }
 
-function deleteCategory(index) {
-    categories = categories.slice(0, index).concat(categories.slice(index + 1));
+
+// Edit Category
+
+function editCategory(i) {
+    document.getElementById("categoryname").value = categories[i].name;
+    document.getElementById("description").value = categories[i].description;
+
+    editIndex = i;
+}
+
+
+// Delete Category
+
+function deleteCategory(i) {
+    categories.splice(i, 1);
     renderCategories();
 }
 
-function renderRoles() {
-    let output = "";
 
-    for (let i = 0; i < roles.length; i++) {
-        output += "<tr id='row" + i + "'>";
-        output += "<td>" + roles[i].id + "</td>";
-        output += "<td>" + roles[i].name + "</td>";
-        output += "<td>" + roles[i].description + "</td>";
-        output += "<td><button type='button' onclick='editRole(" + i + ")'>Edit</button> ";
-        output += "<button type='button' onclick='deleteRole(" + i + ")'>Delete</button></td>";
-        output += "</tr>";
-    }
-
-    document.getElementById("roleRows").innerHTML = output;
-}
+// Add Role
 
 function addRole() {
-    let name = document.getElementById("rolename").value;
+    let name = document.getElementById("rolename").value.trim();
     let description = document.getElementById("description").value;
 
     if (name === "") {
@@ -228,63 +271,76 @@ function addRole() {
         return false;
     }
 
-    if (editingRole === -1) {
+    if (editIndex === -1) {
         roles.push({
             id: "R00" + (roles.length + 1),
             name: name,
             description: description
         });
-
-        showMessage("error", "Role added successfully.");
-    } else {
-        roles[editingRole].name = name;
-        roles[editingRole].description = description;
-
-        editingRole = -1;
-        showMessage("error", "Role updated successfully.");
+    }
+    else {
+        roles[editIndex].name = name;
+        roles[editIndex].description = description;
+        editIndex = -1;
     }
 
-    renderRoles();
     document.getElementById("roleForm").reset();
-    document.getElementById("roleSubmit").innerHTML = "Add Role";
+    renderRoles();
+
+    showMessage("error", "Role saved successfully.");
 
     return false;
 }
 
-function editRole(index) {
-    editingRole = index;
 
-    document.getElementById("rolename").value = roles[index].name;
-    document.getElementById("description").value = roles[index].description;
-    document.getElementById("roleSubmit").innerHTML = "Update Role";
+// Display Roles
 
-    showMessage("error", "Edit the information and click Update Role.");
+function renderRoles() {
+    let body = document.getElementById("roleRows");
+
+    if (!body) {
+        return;
+    }
+
+    body.innerHTML = "";
+
+    for (let i = 0; i < roles.length; i++) {
+        body.innerHTML +=
+            "<tr>" +
+            "<td>" + roles[i].id + "</td>" +
+            "<td>" + roles[i].name + "</td>" +
+            "<td>" + roles[i].description + "</td>" +
+            "<td>" +
+            "<button onclick='editRole(" + i + ")'>Edit</button>" +
+            "<button onclick='deleteRole(" + i + ")'>Delete</button>" +
+            "</td>" +
+            "</tr>";
+    }
 }
 
-function deleteRole(index) {
-    roles = roles.slice(0, index).concat(roles.slice(index + 1));
+
+// Edit Role
+
+function editRole(i) {
+    document.getElementById("rolename").value = roles[i].name;
+    document.getElementById("description").value = roles[i].description;
+
+    editIndex = i;
+}
+
+
+// Delete Role
+
+function deleteRole(i) {
+    roles.splice(i, 1);
     renderRoles();
 }
 
-function renderLocations() {
-    let output = "";
 
-    for (let i = 0; i < locations.length; i++) {
-        output += "<tr id='row" + i + "'>";
-        output += "<td>" + locations[i].id + "</td>";
-        output += "<td>" + locations[i].name + "</td>";
-        output += "<td>" + locations[i].building + "</td>";
-        output += "<td>" + locations[i].floor + "</td>";
-        output += "<td><button type='button' onclick='editLocation(" + i + ")'>Edit</button> ";
-        output += "<button type='button' onclick='deleteLocation(" + i + ")'>Delete</button></td>";
-        output += "</tr>";
-    }
-
-    document.getElementById("locationRows").innerHTML = output;
-}
+// Add Location
 
 function addLocation() {
-    let name = document.getElementById("locationname").value;
+    let name = document.getElementById("locationname").value.trim();
     let building = document.getElementById("building").value;
     let floor = document.getElementById("floor").value;
 
@@ -293,106 +349,186 @@ function addLocation() {
         return false;
     }
 
-    if (editingLocation === -1) {
+    if (editIndex === -1) {
         locations.push({
             id: "L00" + (locations.length + 1),
             name: name,
             building: building,
             floor: floor
         });
+    }
+    else {
+        locations[editIndex].name = name;
+        locations[editIndex].building = building;
+        locations[editIndex].floor = floor;
 
-        showMessage("error", "Location added successfully.");
-    } else {
-        locations[editingLocation].name = name;
-        locations[editingLocation].building = building;
-        locations[editingLocation].floor = floor;
-
-        editingLocation = -1;
-        showMessage("error", "Location updated successfully.");
+        editIndex = -1;
     }
 
-    renderLocations();
     document.getElementById("locationForm").reset();
-    document.getElementById("locationSubmit").innerHTML = "Add Location";
+    renderLocations();
+
+    showMessage("error", "Location saved successfully.");
 
     return false;
 }
 
-function editLocation(index) {
-    editingLocation = index;
 
-    document.getElementById("locationname").value = locations[index].name;
-    document.getElementById("building").value = locations[index].building;
-    document.getElementById("floor").value = locations[index].floor;
-    document.getElementById("locationSubmit").innerHTML = "Update Location";
+// Display Locations
 
-    showMessage("error", "Edit the information and click Update Location.");
+function renderLocations() {
+    let body = document.getElementById("locationRows");
+
+    if (!body) {
+        return;
+    }
+
+    body.innerHTML = "";
+
+    for (let i = 0; i < locations.length; i++) {
+        body.innerHTML +=
+            "<tr>" +
+            "<td>" + locations[i].id + "</td>" +
+            "<td>" + locations[i].name + "</td>" +
+            "<td>" + locations[i].building + "</td>" +
+            "<td>" + locations[i].floor + "</td>" +
+            "<td>" +
+            "<button onclick='editLocation(" + i + ")'>Edit</button>" +
+            "<button onclick='deleteLocation(" + i + ")'>Delete</button>" +
+            "</td>" +
+            "</tr>";
+    }
 }
 
-function deleteLocation(index) {
-    locations = locations.slice(0, index).concat(locations.slice(index + 1));
+
+// Edit Location
+
+function editLocation(i) {
+    document.getElementById("locationname").value = locations[i].name;
+    document.getElementById("building").value = locations[i].building;
+    document.getElementById("floor").value = locations[i].floor;
+
+    editIndex = i;
+}
+
+
+// Delete Location
+
+function deleteLocation(i) {
+    locations.splice(i, 1);
     renderLocations();
 }
 
+
+// Change Admin Password
 
 function changePassword() {
     let current = document.getElementById("currentpassword").value;
-    let password = document.getElementById("newpassword").value;
+    let next = document.getElementById("newpassword").value;
     let confirm = document.getElementById("confirmpassword").value;
 
-    if (current === "" || password === "" || confirm === "") {
-        showMessage("passwordError", "Please fill in all password fields.");
-        return false;
-    } else if (current !== adminPassword) {
+    if (current !== adminPassword) {
         showMessage("passwordError", "Current password is incorrect.");
         return false;
-    } else if (password !== confirm) {
-        showMessage("passwordError", "New passwords do not match.");
-        return false;
-    } else if (current === password) {
-        showMessage("passwordError", "New password must be different from current password.");
-        return false;
-    } else {
-        adminPassword = password;
-        showMessage("passwordError", "Password updated successfully.");
-        document.getElementById("passwordForm").reset();
+    }
+
+    if (next.length < 6) {
+        showMessage("passwordError", "New password must contain at least 6 characters.");
         return false;
     }
+
+    if (next !== confirm) {
+        showMessage("passwordError", "New password and confirm password do not match.");
+        return false;
+    }
+
+    if (next === current) {
+        showMessage("passwordError", "New password must be different from current password.");
+        return false;
+    }
+
+    adminPassword = next;
+
+    document.getElementById("passwordForm").reset();
+
+    showMessage("passwordError", "Password updated successfully.");
+
+    return false;
 }
+
+
+// Generate Report
 
 function reportType() {
     let type = document.getElementById("reportType").value;
+    let from = document.getElementById("fromDate").value;
+    let to = document.getElementById("toDate").value;
 
-    switch (type) {
-        case "Lost Items":
-            showMessage("reportResult", "Lost Items Report Selected");
-            break;
+    showMessage(
+        "reportResult",
+        "Report generated: " + type +
+        (from ? " from " + from : "") +
+        (to ? " to " + to : "")
+    );
+}
 
-        case "Found Items":
-            showMessage("reportResult", "Found Items Report Selected");
-            break;
 
-        case "Claims":
-            showMessage("reportResult", "Claims Report Selected");
-            break;
+// Confirm Logout
 
-        default:
-            showMessage("reportResult", "All Reports Selected");
+function confirmLogout() {
+    if (document.getElementById("logoutOverlay")) {
+        return false;
     }
+
+    let overlay = document.createElement("div");
+
+    overlay.id = "logoutOverlay";
+    overlay.style.position = "fixed";
+    overlay.style.left = "0";
+    overlay.style.top = "0";
+    overlay.style.width = "100%";
+    overlay.style.height = "100%";
+    overlay.style.background = "rgba(0,0,0,0.55)";
+    overlay.style.display = "flex";
+    overlay.style.alignItems = "center";
+    overlay.style.justifyContent = "center";
+    overlay.style.zIndex = "9999";
+
+    let box = document.createElement("div");
+
+    box.style.background = "white";
+    box.style.padding = "25px";
+    box.style.borderRadius = "8px";
+    box.style.textAlign = "center";
+    box.style.minWidth = "260px";
+
+    box.innerHTML =
+        "<h3>Confirm Logout</h3>" +
+        "<p>Are you sure you want to logout?</p>" +
+        "<button id='logoutYes'>Yes</button>" +
+        "<button id='logoutNo'>No</button>";
+
+    overlay.appendChild(box);
+    document.body.appendChild(overlay);
+
+    document.getElementById("logoutYes").onclick = function() {
+        window.location.href = "index.html";
+    };
+
+    document.getElementById("logoutNo").onclick = function() {
+        document.body.removeChild(overlay);
+    };
+
+    return false;
 }
 
-if (document.getElementById("userRows")) {
+
+// Load Functions
+
+document.addEventListener("DOMContentLoaded", function() {
     renderUsers();
-}
-
-if (document.getElementById("roleRows")) {
-    renderRoles();
-}
-
-if (document.getElementById("categoryRows")) {
     renderCategories();
-}
-
-if (document.getElementById("locationRows")) {
+    renderRoles();
     renderLocations();
-}
+    checkTerms();
+});

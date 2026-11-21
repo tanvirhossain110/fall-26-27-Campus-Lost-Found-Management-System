@@ -1,655 +1,828 @@
 
-
 let foundItems = [
-    {
-        id: "F001",
-        name: "Mobile Phone",
-        category: "Electronics",
-        location: "Library",
-        date: "2026-10-20",
-        status: "In Storage"
-    },
-    {
-        id: "F002",
-        name: "Student ID Card",
-        category: "Documents",
-        location: "Cafeteria",
-        date: "2026-10-21",
-        status: "Pending Collection"
-    },
-    {
-        id: "F003",
-        name: "Backpack",
-        category: "Bags",
-        location: "Classroom",
-        date: "2026-10-22",
-        status: "In Storage"
-    }
+
+    {id:"F001",name:"Mobile Phone",category:"Electronics",location:"Library",date:"2026-11-10",description:"Black mobile phone",status:"In Storage"},
+
+    {id:"F002",name:"Student ID Card",category:"Documents",location:"Cafeteria",date:"2026-11-11",description:"Student identity card",status:"Pending Collection"},
+
+    {id:"F003",name:"Backpack",category:"Bags",location:"Room 204",date:"2026-11-12",description:"Black backpack",status:"In Storage"}
+
 ];
-
-
-
 
 let appointments = [
-    {
-        id: "A001",
-        name: "Rahim Ahmed",
-        studentId: "24-10001-1",
-        item: "Mobile Phone",
-        date: "2026-11-15",
-        time: "10:00",
-        status: "Scheduled"
-    },
-    {
-        id: "A002",
-        name: "Karim Hasan",
-        studentId: "24-10002-1",
-        item: "Student ID Card",
-        date: "2026-11-16",
-        time: "11:30",
-        status: "Scheduled"
-    }
+
+    {id:"A001",name:"Rahim Ahmed",studentId:"24-10001-1",item:"Mobile Phone",date:"2026-11-22",time:"10:00",status:"Scheduled"},
+
+    {id:"A002",name:"Karim Hasan",studentId:"24-10002-1",item:"Student ID Card",date:"2026-11-23",time:"11:30",status:"Scheduled"}
+
 ];
-
-
-
-
 
 let handovers = [
-    {
-        id: "H001",
-        itemId: "F003",
-        item: "Backpack",
-        name: "Tanvir Hossain",
-        studentId: "24-10003-1",
-        date: "2026-10-25",
-        time: "12:00",
-        verification: "Verified"
-    }
+
+    {id:"H001",itemId:"F003",item:"Backpack",name:"Tanvir Hossain",studentId:"24-55993-1",date:"2026-11-13",time:"12:00",verification:"Verified"}
+
 ];
 
+let demoPassword = "Officer@123";
+
+let appointmentEditIndex = -1;
+
+let editItemId = "";
+
+let nextItemNumber = 4;
 
 
+// Generate Item ID
 
+function generateItemId() {
+
+    let id = "F" + String(nextItemNumber).padStart(3, "0");
+
+    nextItemNumber++;
+
+    return id;
+
+}
+
+
+// Show Item Status
 
 function showStatus(status) {
 
-    switch (status) {
+    let el = document.getElementById("itemStatus");
 
-        case "In Storage":
-            return "In Storage";
-
-        case "Pending Collection":
-            return "Pending Collection";
-
-        case "Handed Over":
-            return "Handed Over";
-
-        case "Scheduled":
-            return "Scheduled";
-
-        case "Completed":
-            return "Completed";
-
-        case "Cancelled":
-            return "Cancelled";
-
-        default:
-            return "Unknown";
+    if (el) {
+        el.value = status;
     }
+
 }
 
 
-
-
-
-let editItemIndex = -1;
-
-
-function renderItems(items = foundItems) {
-
-    let table = document.getElementById("itemTable");
-
-    if (!table) {
-        return;
-    }
-
-    table.innerHTML = "";
-
-    for (let item of items) {
-
-        let i = foundItems.indexOf(item);
-
-        let row = document.createElement("tr");
-
-        row.innerHTML = `
-            <td>${item.id}</td>
-            <td>${item.name}</td>
-            <td>${item.category}</td>
-            <td>${item.location}</td>
-            <td>${item.date}</td>
-            <td>${showStatus(item.status)}</td>
-            <td>
-                <button type="button" onclick="editItem(${i})">Edit</button>
-                <button type="button" onclick="deleteItem(${i})">Delete</button>
-            </td>
-        `;
-
-        table.appendChild(row);
-    }
-}
-
+// Save and Update Found Item
 
 function saveItem() {
 
-    let name = document.getElementById("itemName").value;
+    let name = document.getElementById("itemName").value.trim();
     let category = document.getElementById("category").value;
-    let location = document.getElementById("location").value;
+    let location = document.getElementById("location").value.trim();
     let date = document.getElementById("foundDate").value;
+    let description = document.getElementById("description").value.trim();
     let status = document.getElementById("itemStatus").value;
+
+    let error = document.getElementById("itemError");
 
     if (name === "" || location === "" || date === "") {
 
-        document.getElementById("itemError").innerHTML =
-            "Please fill all required fields.";
-
+        error.innerHTML = "Please fill all required fields.";
         return false;
+
     }
 
-    if (editItemIndex === -1) {
+    if (editItemId === "") {
 
         let newItem = {
-            id: "F00" + (foundItems.length + 1),
+
+            id: generateItemId(),
             name: name,
             category: category,
             location: location,
             date: date,
+            description: description,
             status: status
+
         };
 
         foundItems.push(newItem);
 
-    } else {
+        error.innerHTML = "Item added successfully.";
 
-        foundItems[editItemIndex].name = name;
-        foundItems[editItemIndex].category = category;
-        foundItems[editItemIndex].location = location;
-        foundItems[editItemIndex].date = date;
-        foundItems[editItemIndex].status = status;
-
-        editItemIndex = -1;
     }
 
-    renderItems();
+    else {
 
-    generateDashboard();
+        for (let i = 0; i < foundItems.length; i++) {
+
+            if (foundItems[i].id === editItemId) {
+
+                foundItems[i].name = name;
+                foundItems[i].category = category;
+                foundItems[i].location = location;
+                foundItems[i].date = date;
+                foundItems[i].description = description;
+                foundItems[i].status = status;
+
+                break;
+
+            }
+
+        }
+
+        editItemId = "";
+
+        error.innerHTML = "Item updated successfully.";
+
+    }
 
     document.getElementById("itemForm").reset();
 
-    document.getElementById("itemError").innerHTML = "";
+    document.getElementById("saveItemButton").innerHTML = "Save Item";
+
+    renderItems();
+    generateDashboard();
 
     return false;
+
 }
 
 
-function editItem(index) {
+// Display Found Items
 
-    let item = foundItems[index];
+function renderItems(list) {
 
-    if (!item) {
+    let body = document.getElementById("itemTable");
+
+    if (!body) {
         return;
     }
 
-    document.getElementById("itemName").value = item.name;
-    document.getElementById("category").value = item.category;
-    document.getElementById("location").value = item.location;
-    document.getElementById("foundDate").value = item.date;
-    document.getElementById("itemStatus").value = item.status;
+    let data = list || foundItems;
 
-    editItemIndex = index;
-}
+    body.innerHTML = "";
 
+    for (let i = 0; i < data.length; i++) {
 
-function deleteItem(index) {
+        body.innerHTML += `
 
-    foundItems = foundItems.slice(0, index)
-        .concat(foundItems.slice(index + 1));
+            <tr>
+                <td>${data[i].id}</td>
+                <td>${data[i].name}</td>
+                <td>${data[i].category}</td>
+                <td>${data[i].location}</td>
+                <td>${data[i].date}</td>
+                <td>${data[i].status}</td>
 
-    if (editItemIndex === index) {
-        editItemIndex = -1;
-        document.getElementById("itemForm").reset();
+                <td>
+                    <button type="button" class="edit-btn"
+                    onclick="editItem('${data[i].id}')">Edit</button>
+
+                    <button type="button" class="delete-btn"
+                    onclick="deleteItemById('${data[i].id}')">Delete</button>
+                </td>
+            </tr>
+
+        `;
+
     }
 
-    renderItems();
-
-    generateDashboard();
 }
 
+
+// Edit Found Item
+
+function editItem(id) {
+
+    let found = false;
+
+    for (let i = 0; i < foundItems.length; i++) {
+
+        if (foundItems[i].id === id) {
+
+            editItemId = id;
+
+            document.getElementById("itemName").value = foundItems[i].name;
+
+            document.getElementById("category").value = foundItems[i].category;
+
+            document.getElementById("location").value = foundItems[i].location;
+
+            document.getElementById("foundDate").value = foundItems[i].date;
+
+            document.getElementById("description").value = foundItems[i].description || "";
+
+            document.getElementById("itemStatus").value = foundItems[i].status;
+
+            document.getElementById("saveItemButton").innerHTML = "Update Item";
+
+            document.getElementById("itemError").innerHTML = "You are editing Item ID: " + id;
+
+            found = true;
+
+            document.getElementById("itemForm").scrollIntoView();
+
+            break;
+
+        }
+
+    }
+
+    if (!found) {
+
+        document.getElementById("itemError").innerHTML = "Item not found.";
+
+    }
+
+}
+
+
+// Delete Found Item
+
+function deleteItemById(id) {
+
+    let confirmDelete = confirm("Are you sure you want to delete this item?");
+
+    if (confirmDelete) {
+
+        for (let i = 0; i < foundItems.length; i++) {
+
+            if (foundItems[i].id === id) {
+
+                foundItems.splice(i, 1);
+
+                break;
+
+            }
+
+        }
+
+        if (editItemId === id) {
+
+            editItemId = "";
+
+            document.getElementById("itemForm").reset();
+
+            document.getElementById("saveItemButton").innerHTML = "Save Item";
+
+        }
+
+        renderItems();
+        generateDashboard();
+
+        let error = document.getElementById("itemError");
+
+        if (error) {
+            error.innerHTML = "Item deleted successfully.";
+        }
+
+    }
+
+}
+
+
+// Search Found Items
 
 function searchItems() {
 
-    let searchText = document.getElementById("itemSearch").value.toLowerCase();
+    let input = document.getElementById("itemSearch");
+
+    if (!input) {
+        return;
+    }
+
+    let q = input.value.toLowerCase();
 
     let result = [];
 
     for (let item of foundItems) {
 
         if (
-            item.name.toLowerCase().indexOf(searchText) !== -1 ||
-            item.id.toLowerCase().indexOf(searchText) !== -1 ||
-            item.category.toLowerCase().indexOf(searchText) !== -1 ||
-            item.location.toLowerCase().indexOf(searchText) !== -1
+
+            item.name.toLowerCase().indexOf(q) > -1 ||
+
+            item.id.toLowerCase().indexOf(q) > -1 ||
+
+            item.category.toLowerCase().indexOf(q) > -1 ||
+
+            item.location.toLowerCase().indexOf(q) > -1
+
         ) {
 
             result.push(item);
+
         }
+
     }
 
     renderItems(result);
+
 }
 
 
+// Reset Edit Mode When Form Is Cleared
 
+document.addEventListener("DOMContentLoaded", function() {
 
+    let form = document.getElementById("itemForm");
 
-function renderAppointments(searchText = "") {
+    if (form) {
 
-    let table = document.getElementById("appointmentTable");
+        form.addEventListener("reset", function() {
 
-    if (!table) {
-        return;
+            editItemId = "";
+
+            document.getElementById("saveItemButton").innerHTML = "Save Item";
+
+        });
+
     }
 
-    table.innerHTML = "";
+});
 
-    for (let i = 0; i < appointments.length; i++) {
 
-        let appointment = appointments[i];
-
-        let searchData = (
-            appointment.name + " " +
-            appointment.studentId + " " +
-            appointment.item
-        ).toLowerCase();
-
-        if (searchData.indexOf(searchText.toLowerCase()) !== -1) {
-
-            let row = document.createElement("tr");
-
-            row.innerHTML = `
-                <td>${appointment.id}</td>
-                <td>${appointment.name}</td>
-                <td>${appointment.studentId}</td>
-                <td>${appointment.item}</td>
-                <td>${appointment.date}</td>
-                <td>${appointment.time}</td>
-                <td>${showStatus(appointment.status)}</td>
-                <td>
-                    <button type="button" onclick="updateAppointment(${i})">Complete</button>
-                    <button type="button" onclick="cancelAppointment(${i})">Cancel</button>
-                </td>
-            `;
-
-            table.appendChild(row);
-        }
-    }
-}
-
+// Save Appointment
 
 function saveAppointment() {
 
-    let name = document.getElementById("studentName").value;
-    let studentId = document.getElementById("studentId").value;
-    let item = document.getElementById("appointmentItem").value;
+    let name = document.getElementById("studentName").value.trim();
+
+    let studentId = document.getElementById("studentId").value.trim();
+
+    let item = document.getElementById("appointmentItem").value.trim();
+
     let date = document.getElementById("appointmentDate").value;
+
     let time = document.getElementById("appointmentTime").value;
+
     let status = document.getElementById("appointmentStatus").value;
 
-    if (name === "" || studentId === "" || item === "" ||
-        date === "" || time === "") {
+    if (!name || !studentId || !item || !date || !time) {
 
-        document.getElementById("appointmentError").innerHTML =
-            "Please fill all required fields.";
+        document.getElementById("appointmentError").innerHTML = "Please fill all required fields.";
 
         return false;
+
     }
 
-    let newAppointment = {
-        id: "A00" + (appointments.length + 1),
-        name: name,
-        studentId: studentId,
-        item: item,
-        date: date,
-        time: time,
-        status: status
-    };
+    if (appointmentEditIndex === -1) {
 
-    appointments.push(newAppointment);
+        appointments.push({
 
-    renderAppointments();
+            id: "A00" + (appointments.length + 1),
+            name: name,
+            studentId: studentId,
+            item: item,
+            date: date,
+            time: time,
+            status: status
+
+        });
+
+    }
+
+    else {
+
+        appointments[appointmentEditIndex].name = name;
+        appointments[appointmentEditIndex].studentId = studentId;
+        appointments[appointmentEditIndex].item = item;
+        appointments[appointmentEditIndex].date = date;
+        appointments[appointmentEditIndex].time = time;
+        appointments[appointmentEditIndex].status = status;
+
+        appointmentEditIndex = -1;
+
+    }
 
     document.getElementById("appointmentForm").reset();
 
-    document.getElementById("appointmentError").innerHTML = "";
+    renderAppointments();
+
+    document.getElementById("appointmentError").innerHTML = "Appointment saved successfully.";
 
     return false;
+
 }
 
 
-function updateAppointment(index) {
+// Display Appointments
 
-    appointments[index].status = "Completed";
+function renderAppointments(list) {
+
+    let body = document.getElementById("appointmentTable");
+
+    if (!body) {
+        return;
+    }
+
+    let data = list || appointments;
+
+    body.innerHTML = "";
+
+    for (let i = 0; i < data.length; i++) {
+
+        body.innerHTML += "<tr><td>" + data[i].id + "</td><td>" + data[i].name + "</td><td>" + data[i].studentId + "</td><td>" + data[i].item + "</td><td>" + data[i].date + "</td><td>" + data[i].time + "</td><td>" + data[i].status + "</td><td><button onclick='editAppointment(\"" + data[i].id + "\")'>Edit</button><button onclick='deleteAppointment(\"" + data[i].id + "\")'>Delete</button></td></tr>";
+
+    }
+
+}
+
+
+// Edit Appointment
+
+function editAppointment(id) {
+
+    for (let i = 0; i < appointments.length; i++) {
+
+        if (appointments[i].id === id) {
+
+            appointmentEditIndex = i;
+
+            document.getElementById("studentName").value = appointments[i].name;
+
+            document.getElementById("studentId").value = appointments[i].studentId;
+
+            document.getElementById("appointmentItem").value = appointments[i].item;
+
+            document.getElementById("appointmentDate").value = appointments[i].date;
+
+            document.getElementById("appointmentTime").value = appointments[i].time;
+
+            document.getElementById("appointmentStatus").value = appointments[i].status;
+
+            break;
+
+        }
+
+    }
+
+}
+
+
+// Delete Appointment
+
+function deleteAppointment(id) {
+
+    for (let i = 0; i < appointments.length; i++) {
+
+        if (appointments[i].id === id) {
+
+            appointments.splice(i, 1);
+
+            break;
+
+        }
+
+    }
+
+    appointmentEditIndex = -1;
 
     renderAppointments();
+
 }
 
 
-function cancelAppointment(index) {
-
-    appointments[index].status = "Cancelled";
-
-    renderAppointments();
-}
-
+// Search Appointments
 
 function searchAppointments() {
 
-    let searchText = document.getElementById("appointmentSearch").value.toLowerCase();
+    let input = document.getElementById("appointmentSearch");
 
-    renderAppointments(searchText);
+    if (!input) {
+        return;
+    }
+
+    let q = input.value.toLowerCase();
+
+    let result = [];
+
+    for (let a of appointments) {
+
+        if (a.name.toLowerCase().indexOf(q) > -1 || a.studentId.toLowerCase().indexOf(q) > -1) {
+
+            result.push(a);
+
+        }
+
+    }
+
+    renderAppointments(result);
+
 }
 
 
-
-
+// Save Handover
 
 function saveHandover() {
 
-    let itemId = document.getElementById("handoverItemId").value;
-    let item = document.getElementById("handoverItemName").value;
-    let name = document.getElementById("receiverName").value;
-    let studentId = document.getElementById("receiverId").value;
+    let itemId = document.getElementById("handoverItemId").value.trim();
+
+    let itemName = document.getElementById("handoverItemName").value.trim();
+
+    let name = document.getElementById("receiverName").value.trim();
+
+    let studentId = document.getElementById("receiverId").value.trim();
+
     let date = document.getElementById("handoverDate").value;
+
     let time = document.getElementById("handoverTime").value;
 
-    let verification = document.getElementsByName("verification");
+    let radios = document.getElementsByName("verification");
 
-    let verified = "";
+    let verification = "";
 
-    for (let i = 0; i < verification.length; i++) {
+    for (let radio of radios) {
 
-        if (verification[i].checked) {
-            verified = verification[i].value;
+        if (radio.checked) {
+            verification = radio.value;
         }
+
     }
 
-    let error = document.getElementById("handoverError");
+    if (verification !== "Verified") {
 
-    if (itemId === "" || item === "" || name === "" ||
-        studentId === "" || date === "" || time === "") {
-
-        error.innerHTML = "Please fill all required fields.";
+        document.getElementById("handoverError").innerHTML = "Ownership must be verified before handover.";
 
         return false;
+
     }
 
-    if (verified !== "Verified") {
-
-        error.innerHTML =
-            "Ownership must be verified before handover.";
-
-        return false;
-    }
-
-    let itemFound = false;
+    let found = false;
 
     for (let i = 0; i < foundItems.length; i++) {
 
-        if (foundItems[i].id === itemId &&
-            foundItems[i].name.toLowerCase() === item.toLowerCase()) {
+        if (foundItems[i].id === itemId && foundItems[i].name.toLowerCase() === itemName.toLowerCase()) {
 
-            itemFound = true;
-
-            if (foundItems[i].status === "Handed Over") {
-
-                error.innerHTML = "This item has already been handed over.";
-
-                return false;
-            }
+            found = true;
 
             foundItems[i].status = "Handed Over";
+
+            break;
+
         }
+
     }
 
-    if (itemFound === false) {
+    if (!found) {
 
-        error.innerHTML = "Item ID or Item Name does not match.";
+        document.getElementById("handoverError").innerHTML = "Item ID and Item Name do not match a found item.";
 
         return false;
+
     }
 
-    let newHandover = {
+    handovers.push({
 
         id: "H00" + (handovers.length + 1),
         itemId: itemId,
-        item: item,
+        item: itemName,
         name: name,
         studentId: studentId,
         date: date,
         time: time,
-        verification: verified
-    };
+        verification: verification
 
-    handovers.push(newHandover);
-
-    renderHistory();
-
-    renderItems();
-
-    generateDashboard();
+    });
 
     document.getElementById("handoverForm").reset();
 
-    error.innerHTML = "Handover completed successfully.";
+    renderHistory();
+
+    generateDashboard();
+
+    document.getElementById("handoverError").innerHTML = "Handover completed successfully.";
 
     return false;
+
 }
 
 
+// Display Handover History
 
+function renderHistory(list) {
 
+    let body = document.getElementById("historyTable");
 
-function renderHistory(searchText = "") {
-
-    let table = document.getElementById("historyTable");
-
-    if (!table) {
+    if (!body) {
         return;
     }
 
-    table.innerHTML = "";
+    let data = list || handovers;
 
-    for (let record of handovers) {
+    body.innerHTML = "";
 
-        let searchData = (
-            record.id + " " +
-            record.itemId + " " +
-            record.name + " " +
-            record.studentId + " " +
-            record.item
-        ).toLowerCase();
+    for (let i = 0; i < data.length; i++) {
 
-        if (searchData.indexOf(searchText.toLowerCase()) !== -1) {
+        body.innerHTML += "<tr><td>" + data[i].id + "</td><td>" + data[i].itemId + "</td><td>" + data[i].item + "</td><td>" + data[i].name + "</td><td>" + data[i].studentId + "</td><td>" + data[i].date + "</td><td>" + data[i].time + "</td><td>" + data[i].verification + "</td></tr>";
 
-            let row = document.createElement("tr");
-
-            row.innerHTML = `
-                <td>${record.id}</td>
-                <td>${record.itemId}</td>
-                <td>${record.item}</td>
-                <td>${record.name}</td>
-                <td>${record.studentId}</td>
-                <td>${record.date}</td>
-                <td>${record.time}</td>
-                <td>${record.verification}</td>
-            `;
-
-            table.appendChild(row);
-        }
     }
 
     let count = document.getElementById("historyCount");
 
     if (count) {
-        count.innerHTML = handovers.length;
+        count.innerHTML = data.length;
     }
+
 }
 
+
+// Search Handover History
 
 function searchHistory() {
 
-    let searchText = document.getElementById("historySearch").value.toLowerCase();
+    let input = document.getElementById("historySearch");
 
-    renderHistory(searchText);
+    if (!input) {
+        return;
+    }
+
+    let q = input.value.toLowerCase();
+
+    let result = [];
+
+    for (let h of handovers) {
+
+        if (h.name.toLowerCase().indexOf(q) > -1 || h.studentId.toLowerCase().indexOf(q) > -1) {
+
+            result.push(h);
+
+        }
+
+    }
+
+    renderHistory(result);
+
 }
 
 
-
-
+// Generate Dashboard
 
 function generateDashboard() {
 
-    let total = foundItems.length;
+    let total = document.getElementById("totalItems");
+
+    if (!total) {
+        return;
+    }
 
     let storage = 0;
     let pending = 0;
     let handed = 0;
 
-    for (let i = 0; i < foundItems.length; i++) {
+    for (let item of foundItems) {
 
-        if (foundItems[i].status === "In Storage") {
-
+        if (item.status === "In Storage") {
             storage++;
+        }
 
-        } else if (foundItems[i].status === "Pending Collection") {
-
+        else if (item.status === "Pending Collection") {
             pending++;
+        }
 
-        } else if (foundItems[i].status === "Handed Over") {
-
+        else if (item.status === "Handed Over") {
             handed++;
         }
+
     }
 
-    let totalElement = document.getElementById("totalItems");
+    total.innerHTML = foundItems.length;
 
-    if (totalElement) {
+    document.getElementById("storageItems").innerHTML = storage;
 
-        totalElement.innerHTML = total;
+    document.getElementById("pendingItems").innerHTML = pending;
 
-        document.getElementById("storageItems").innerHTML = storage;
+    document.getElementById("handedItems").innerHTML = handed;
 
-        document.getElementById("pendingItems").innerHTML = pending;
+    let recent = document.getElementById("recentItems");
 
-        document.getElementById("handedItems").innerHTML = handed;
+    recent.innerHTML = "";
+
+    for (let i = foundItems.length - 1; i >= 0 && i >= foundItems.length - 5; i--) {
+
+        recent.innerHTML += "<tr><td>" + foundItems[i].id + "</td><td>" + foundItems[i].name + "</td><td>" + foundItems[i].category + "</td><td>" + foundItems[i].location + "</td><td>" + foundItems[i].date + "</td><td>" + foundItems[i].status + "</td></tr>";
+
     }
 
-    let recentTable = document.getElementById("recentItems");
-
-    if (recentTable) {
-
-        recentTable.innerHTML = "";
-
-        let recent = foundItems.slice(-3);
-
-        for (let item of recent) {
-
-            let row = document.createElement("tr");
-
-            row.innerHTML = `
-                <td>${item.id}</td>
-                <td>${item.name}</td>
-                <td>${item.category}</td>
-                <td>${item.location}</td>
-                <td>${item.date}</td>
-                <td>${showStatus(item.status)}</td>
-            `;
-
-            recentTable.appendChild(row);
-        }
-    }
 }
 
 
-
-
-
+// Update Profile
 
 function updateProfile() {
 
-    let name = document.getElementById("officerName").value;
-    let email = document.getElementById("officerEmail").value;
-    let phone = document.getElementById("officerPhone").value;
+    let name = document.getElementById("officerName").value.trim();
 
-    if (name === "" || email === "" || phone === "") {
+    let email = document.getElementById("officerEmail").value.trim();
 
-        document.getElementById("profileMessage").innerHTML =
-            "Please fill all fields.";
+    if (!name || !email) {
+
+        document.getElementById("profileMessage").innerHTML = "Please fill required fields.";
 
         return false;
+
     }
 
-    document.getElementById("profileMessage").innerHTML =
-        "Profile updated successfully.";
+    document.getElementById("profileMessage").innerHTML = "Profile updated successfully.";
 
     return false;
+
 }
 
 
-
-
-
-let demoPassword = "officer123";
-
+// Change Password
 
 function changePassword() {
 
     let current = document.getElementById("currentPassword").value;
 
-    let newPass = document.getElementById("newPassword").value;
+    let next = document.getElementById("newPassword").value;
 
     let confirm = document.getElementById("confirmPassword").value;
 
-    let error = document.getElementById("passwordError");
-
     if (current !== demoPassword) {
 
-        error.innerHTML = "Current password is incorrect.";
+        document.getElementById("passwordError").innerHTML = "Current password is incorrect.";
 
         return false;
 
-    } else if (newPass !== confirm) {
-
-        error.innerHTML =
-            "New password and confirm password do not match.";
-
-        return false;
-
-    } else {
-
-        demoPassword = newPass;
-
-        error.innerHTML = "Password changed successfully.";
-
-        document.getElementById("passwordForm").reset();
-
-        return false;
     }
+
+    if (next.length < 6) {
+
+        document.getElementById("passwordError").innerHTML = "New password must contain at least 6 characters.";
+
+        return false;
+
+    }
+
+    if (next !== confirm) {
+
+        document.getElementById("passwordError").innerHTML = "New password and confirm password do not match.";
+
+        return false;
+
+    }
+
+    if (next === current) {
+
+        document.getElementById("passwordError").innerHTML = "New password must be different from current password.";
+
+        return false;
+
+    }
+
+    demoPassword = next;
+
+    document.getElementById("passwordForm").reset();
+
+    document.getElementById("passwordError").innerHTML = "Password updated successfully.";
+
+    return false;
+
 }
 
 
+// Confirm Logout
+
+function confirmLogout() {
+
+    if (document.getElementById("logoutOverlay")) {
+        return false;
+    }
+
+    let overlay = document.createElement("div");
+
+    overlay.id = "logoutOverlay";
+
+    overlay.style.position = "fixed";
+    overlay.style.left = "0";
+    overlay.style.top = "0";
+    overlay.style.width = "100%";
+    overlay.style.height = "100%";
+    overlay.style.background = "rgba(0,0,0,0.55)";
+    overlay.style.display = "flex";
+    overlay.style.alignItems = "center";
+    overlay.style.justifyContent = "center";
+    overlay.style.zIndex = "9999";
+
+    let box = document.createElement("div");
+
+    box.style.background = "white";
+    box.style.padding = "25px";
+    box.style.borderRadius = "8px";
+    box.style.textAlign = "center";
+
+    box.innerHTML = "<h3>Confirm Logout</h3><p>Are you sure you want to logout?</p><button id='logoutYes'>Yes</button><button id='logoutNo'>No</button>";
+
+    overlay.appendChild(box);
+
+    document.body.appendChild(overlay);
+
+    document.getElementById("logoutYes").onclick = function() {
+
+        window.location.href = "index.html";
+
+    };
+
+    document.getElementById("logoutNo").onclick = function() {
+
+        document.body.removeChild(overlay);
+
+    };
+
+    return false;
+
+}
 
 
+// Load All Functions
 
 document.addEventListener("DOMContentLoaded", function() {
 
