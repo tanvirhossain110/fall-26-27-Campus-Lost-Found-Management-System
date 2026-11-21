@@ -1,0 +1,103 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f1f4f8;
+    color: #263238;
+}
+header {
+    background: #173b57;
+    color: white;
+    text-align: center;
+    padding: 25px 10px;
+}
+header h1 {
+    margin: 0 0 8px;
+}
+nav {
+    background: #102d43;
+    padding: 14px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+}
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 14px;
+    display: inline-block;
+}
+nav a:hover {
+    text-decoration: underline;
+}
+main {
+    width: 90%;
+    max-width: 1000px;
+    margin: 30px auto;
+}
+.welcome, .login-card {
+    background: white;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
+.welcome {
+    text-align: center;
+}
+.login-card {
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+}
+label {
+    display: block;
+    margin: 12px 0 6px;
+}
+input, select {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #b8c4ce;
+    border-radius: 4px;
+}
+input:focus, select:focus {
+    outline: 2px solid #75a9cf;
+}
+button {
+    background: #17628b;
+    color: white;
+    border: 0;
+    padding: 10px 18px;
+    margin: 10px 5px 0 0;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+button:hover {
+    background: #0d405e;
+    transform: scale(1.03);
+}
+.error {
+    color: #c62828;
+}
+.demo-info {
+    font-size: 14px;
+    color: #52616b;
+    line-height: 1.7;
+}
+footer {
+    text-align: center;
+    padding: 18px;
+    background: #173b57;
+    color: white;
+}
+@media (max-width: 600px) {
+    nav a {
+        margin: 6px;
+    }
+    main {
+        width: 94%;
+    }
+}
