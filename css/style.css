@@ -1,3 +1,4 @@
+
 /* Claim Verification Officer Project CSS */
 
 * {
@@ -16,6 +17,7 @@ body {
 }
 
 /* Heading Style */
+
 h1, h2, h3 {
     color: #17365D;
     margin-bottom: 12px;
@@ -36,13 +38,39 @@ p {
     margin-bottom: 12px;
 }
 
+/* Navigation Style */
+
+nav {
+    background-color: #17365D;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 20px;
+    display: inline-block;
+    padding: 8px;
+}
+
+nav a:hover {
+    background-color: #2563A6;
+    color: white;
+    border-radius: 5px;
+}
+
 /* Horizontal Line */
+
 hr {
     margin: 18px 0;
     border: 1px solid #D9E1EA;
 }
 
 /* Link Style */
+
 a {
     color: #1D5FA7;
     font-weight: bold;
@@ -53,6 +81,7 @@ a:hover {
 }
 
 /* List Style */
+
 ul {
     margin: 12px 0 20px 25px;
 }
@@ -62,6 +91,7 @@ li {
 }
 
 /* Table Style */
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -91,6 +121,7 @@ tr:hover {
 }
 
 /* Form Style */
+
 form {
     background-color: white;
     padding: 20px;
@@ -120,6 +151,7 @@ select:focus, textarea:focus {
 }
 
 /* Button Style */
+
 button, input[type="submit"] {
     background-color: #17365D;
     color: white;
