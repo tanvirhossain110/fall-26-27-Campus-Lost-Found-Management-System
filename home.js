@@ -183,6 +183,17 @@ function loginUser() {
 
     }
 
+    if (role === "Admin" &&
+        email.toLowerCase() === "clame-officer@campus.edu" &&
+        password === "clame-officer@123") {
+
+        window.location.href = "Dashboard.html";
+
+        return false;
+
+    }
+
+
 
     // Check Officer Login
 
