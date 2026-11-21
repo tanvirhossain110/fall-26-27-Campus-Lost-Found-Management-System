@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Manage Found Items">
-    <title>Manage Found Items</title>
+    <meta name="description" content="Manage Found Item">
+    <title>Manage Found Item</title>
     <link rel="stylesheet" href="css/officer.css">
 </head>
 <body>
@@ -16,13 +16,14 @@
 </header>
 
 <nav>
+    <a href="index.html">Home</a> |
     <a href="officer-dashboard.html">Dashboard</a> |
-    <a href="manage-found-items.html">Manage Found Items</a> |
-    <a href="collection-appointments.html">Appointments</a> |
+    <a href="manage-found-item.html">Manage Found Items</a> |
+    <a href="collections-appoinment.html">Appointments</a> |
     <a href="item-handover.html">Item Handover</a> |
     <a href="handover-history.html">History</a> |
     <a href="officer-profile.html">My Profile</a> |
-    <a href="#">Logout</a>
+    <a href="#" onclick="return confirmLogout()">Logout</a>
 </nav>
 
 <main>
@@ -87,27 +88,28 @@
                     <tr>
                         <td></td>
                         <td>
-                            <button type="submit">Save Item</button>
-                            <button type="reset">Clear</button>
+                            <button type="submit" id="saveItemButton">Save Item</button>
+                            <button type="reset" id="clearItemButton">Clear</button>
                         </td>
                     </tr>
                 </table>
 
                 <p class="error" id="itemError"></p>
+
             </fieldset>
 
         </form>
     </section>
 
-  <section>
-    <h3>Search Found Items</h3>
+    <section>
+        <h3>Search Found Items</h3>
 
-    <input type="text" id="itemSearch"
-    placeholder="Search by item name or ID"
-    onkeyup="searchItems()">
+        <input type="text" id="itemSearch"
+               placeholder="Search by item name or ID"
+               onkeyup="searchItems()">
 
-    <button type="button" onclick="searchItems()">Search</button>
-</section>
+        <button type="button" onclick="searchItems()">Search</button>
+    </section>
 
     <section>
         <h3>All Found Items</h3>
