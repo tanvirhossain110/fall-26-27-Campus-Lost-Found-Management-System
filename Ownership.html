@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ownership Verification Decision</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Claim Verification Officer Portal</h1>
+    </header>
+
+    <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="Claim.html">Claim Evidence Review</a>
+        <a href="Ownership.html">Ownership Verification</a>
+        <a href="Disputed.html">Disputed Claim Investigation</a>
+    </nav>
+
+    <h2>Ownership Verification Decision Form</h2>
+
+    <a href="dashboard.html">Back to Dashboard</a>
+
+    <hr>
+
+    <h2>2. Ownership Verification Decision Form</h2>
+
+    <p>Take an official decision after reviewing the evidence for a claim.</p>
+
+    <form>
+
+        <label for="claim-id">Select Claim ID:</label>
+        <br>
+
+        <select id="claim-id" name="claim_id">
+
+            <option value="">-- Select Claim ID --</option>
+
+            <option value="CL-101">
+                24-56416-1 (Apple AirPods Pro - Rahim Ahmed)
+            </option>
+
+            <option value="CL-102">
+                24-56435-1 (Scientific Calculator - Nusrat Jahan)
+            </option>
+
+            <option value="CL-103">
+                24-56437-1 (Laptop - Rashdhan)
+            </option>
+
+            <option value="CL-104">
+                24-56438-1 (Watch - Adhib)
+            </option>
+
+        </select>
+
+        <br><br>
+
+        <label for="decision">Verification Decision:</label>
+        <br>
+
+        <select id="decision" name="decision">
+
+            <option value="">-- Select Decision --</option>
+
+            <option value="approved">Approve Claim</option>
+
+            <option value="rejected">Reject Claim</option>
+
+            <option value="disputed">Mark as Disputed</option>
+
+        </select>
+
+        <br><br>
+
+        <label for="remarks">Officer Remarks / Comments:</label>
+        <br>
+
+        <textarea
+            id="remarks"
+            name="remarks"
+            rows="4"
+            cols="50"
+            placeholder="Write verification notes or rejection reasons here..."
+        ></textarea>
+
+        <br><br>
+
+        <input type="submit" value="Submit Decision">
+
+    </form>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
