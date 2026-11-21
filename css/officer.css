@@ -135,22 +135,42 @@ button:hover {
     transform: scale(1.03);
 }
 
-/* Edit Button */
+
 .edit-btn {
+
     background: #e69522;
 }
 
 .edit-btn:hover {
     background: #c4770c;
+
+    background: #17628b;
+    color: white;
+}
+
+.edit-btn:hover {
+    background: #0d405e;
+    transform: scale(1.03);
+
 }
 
 /* Delete Button */
 .delete-btn {
+
     background: #d32f2f;
 }
 
 .delete-btn:hover {
     background: #a71919;
+
+    background: #17628b;
+    color: white;
+}
+
+.delete-btn:hover {
+    background: #0d405e;
+    transform: scale(1.03);
+ 
 }
 
 .error {
