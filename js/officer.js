@@ -799,26 +799,23 @@ function confirmLogout() {
     box.style.borderRadius = "8px";
     box.style.textAlign = "center";
 
-    box.innerHTML = "<h3>Confirm Logout</h3><p>Are you sure you want to logout?</p><button id='logoutYes'>Yes</button><button id='logoutNo'>No</button>";
+    box.innerHTML = "<h3>Confirm Logout</h3><p>Are you sure you want to logout?</p><button id='logoutYes' onclick='logoutYes()'>Yes</button><button id='logoutNo' onclick='logoutNo()'>No</button>";
 
     overlay.appendChild(box);
 
     document.body.appendChild(overlay);
 
-    document.getElementById("logoutYes").onclick = function() {
-
-        window.location.href = "index.html";
-
-    };
-
-    document.getElementById("logoutNo").onclick = function() {
-
-        document.body.removeChild(overlay);
-
-    };
-
     return false;
 
+}
+
+function logoutYes() {
+    window.location.href = "index.html";
+}
+
+function logoutNo() {
+    let overlay = document.getElementById("logoutOverlay");
+    document.body.removeChild(overlay);
 }
 
 
