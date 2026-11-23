@@ -183,6 +183,17 @@ function loginUser() {
 
     }
 
+    if (role === "Claim Verification Officer" &&
+        email.toLowerCase() === "clame-officer@campus.edu" &&
+        password === "clame-officer@123") {
+
+        window.location.href = "Dashbord.html";
+
+        return false;
+
+    }
+
+
 
     // Check Officer Login
 
